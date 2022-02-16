@@ -1,0 +1,6 @@
+Siswa
+user dan pass nya nis {11706001 sampai 11706211)
+
+Admin
+username : admin
+pass : admin12345

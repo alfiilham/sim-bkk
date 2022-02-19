@@ -24,7 +24,7 @@ class CreateSiswasTable extends Migration
             $table->year('masuk');
             $table->year('lulus');
             $table->longtext('alamat')->nullable();
-            // $table->string('email',50)->default('Belum Diisi');
+            $table->string('email',50)->default('Belum Diisi');
             $table->string('telp',20)->nullable();
             $table->string('status_id',30)->nullable();
             $table->timestamps();

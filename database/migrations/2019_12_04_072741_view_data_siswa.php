@@ -16,7 +16,7 @@ class ViewDataSiswa extends Migration
         db::statement('CREATE VIEW dataSiswa as
         SELECT siswas.id,siswas.user_id,siswas.nisn,siswas.nis,users.name,siswas.jk,
         siswas.jurusan_id,jurusans.jurusan,siswas.rayon_id,rayons.rayon,
-        siswas.masuk,siswas.lulus,siswas.alamat,siswas.telp,email,siswas.status_id,
+        siswas.masuk,siswas.lulus,siswas.alamat,siswas.telp,siswas.email,siswas.status_id,
         statuses.status, siswas.deleted_at from siswas
         INNER join jurusans on jurusans.id = siswas.jurusan_id
         INNER join users on users.id = siswas.user_id

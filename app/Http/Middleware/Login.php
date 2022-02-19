@@ -17,7 +17,10 @@ class Login
     {
         if(auth()->user()->role == 'admin'){
             return redirect('home');
-            }
+        }
+        elseif(auth()->user()->role == 'instansi'){
+            return redirect('instansi');
+        }
             return redirect('user');
     }
 }

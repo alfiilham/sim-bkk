@@ -4,6 +4,9 @@
 @if(auth::user()->role == 'admin')
 @section('title','SIMBKK | Dashboard Admin')
 @include('admin.dashboard')
+@elseif(auth::user()->role == 'instansi')
+@section('title','SIMBKK | Dashboard Instansi')
+@include('instansi.dashboard')
 @else
 @section('title','SIMBKK | Dashboard Alumni')
 @include('user.dashboard')

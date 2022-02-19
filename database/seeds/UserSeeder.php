@@ -33,5 +33,21 @@ class UserSeeder extends Seeder
                 'foto'=>'default.png'
                 ]);
         }
+        for($a = 2; $a <= 100; $a++){
+            $data = db::table('instansis')->select('nama')->where('id',$a)->get();
+            foreach($data as $nama){}
+            $lowername = strtolower($nama->nama);
+            $result = preg_replace("/[^a-zA-Z]/", "", $lowername);
+            $nospasi = str_replace(' ', '', $result);
+            db::table('users')->insert([
+                'name'=> $nama->nama,
+                'username'=> $nospasi,
+                'email'=> $nospasi.'@gmail.com',
+                'password'=> Hash::make($nospasi),
+                'role'=>'instansi',
+                'foto'=>'default.png'
+                ]);
+        }
+
     }
 }

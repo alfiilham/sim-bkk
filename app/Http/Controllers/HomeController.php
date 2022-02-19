@@ -76,7 +76,7 @@ class HomeController extends Controller
         $status = Status::all();
         $company = Instansi::orderby('nama','asc')->where('nama','!=',null)->get();
         $rayon = Rayon::orderby('rayon','asc')->get();
-        if(auth::user()->role != 'admin'){
+        if(auth::user()->role == 'alumni'){
             switch (auth::user()->data->status_id) {
                 case 1:
                     $formNon = ['Nama Instansi','Divisi','Durasi Kontrak Kerja','Pendapatan Bulanan','Alamat Instansi'];
@@ -92,8 +92,10 @@ class HomeController extends Controller
                     $formNon = ['Nama Instansi','Divisi','Durasi Kontrak Kerja','Pendapatan Bulanan','Alamat Instansi'];
                     break;
             }
+        }elseif(auth::user()->role == 'instansi'){
+            $preset = preset::where('status','active')->first();
+            return view('dashboard',compact('preset','company'));
         }else{
-
             $formNon = 'admin';
         }
 

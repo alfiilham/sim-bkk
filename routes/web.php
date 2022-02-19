@@ -68,7 +68,7 @@ Route::delete('inputinstansi/delete/{id}','InstansiController@destroy');
 Route::resource('ajaxproducts','ProductController');
 Route::get('/user','UserController@index');
 
-//AlumniDashboard
+//UserDashboard
 Route::post('/update/profile','HomeController@UpdateProfile')->name('profile.update');
 Route::get('/EditProfil','HomeController@profiles')->name('profiles');
 Route::post('/EditProfil','HomeController@editProfiles')->name('edit.profiles');

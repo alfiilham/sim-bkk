@@ -32,7 +32,7 @@ class StatusController extends Controller
         $rayon = Rayon::orderby('rayon','asc')->get();
         $preset = preset::where('status','active')->first();
         // end chart jejak alumni
-        if(auth::user()->role != 'admin'){
+        if(auth::user()->role == 'alumni'){
             switch (auth::user()->data->status_id) {
                 case 1:
                     $formNon = ['Nama Instansi','Divisi','Durasi Kontrak Kerja','Pendapatan Bulanan','Alamat Instansi'];
@@ -48,8 +48,11 @@ class StatusController extends Controller
                     $formNon = ['Nama Instansi','Divisi','Durasi Kontrak Kerja','Pendapatan Bulanan','Alamat Instansi'];
                     break;
             }
-        }else{
-
+        }
+        elseif(auth::user()->role == 'instansi'){
+            return view('instansi.editdata',compact('company','rayon','preset'));
+        }
+        else{
             $formNon = 'admin';
         }
         return view('user.editstatus',compact('jurusan','status','company','preset','rayon','formNon'));

@@ -216,7 +216,7 @@
                                  alt=""style="object-fit: cover; height: 70px ; width: 70px"
                                />
                              </div>
-                             <div class="m-card-user__details">
+                             <div class="m-card-user__details d-inline">
                                <span
                                  class="m-card-user__name m--font-weight-500"
                              >{{ Auth::user()->name }}</span
@@ -623,6 +623,22 @@
               <a href="{{url('/portofolio')}}" class="m-menu__link m-menu__toggle"
                   ><i class="m-menu__link-icon fas fa-medal"></i
                   ><span class="m-menu__link-text">Kelola Portofolio</span></a
+                >
+              </li>
+              @endif
+              @if(auth::user()->role == 'instansi')
+                <li class="m-menu__section ">
+                        <h4 class="m-menu__section-text">Instansi</h4>
+                        <i class="m-menu__section-icon flaticon-more-v2"></i>
+                      </li>
+              </li>
+
+              {{-- sub-aside Instansi --}}
+
+              <li class="m-menu__item @yield('dataInstansi')" aria-haspopup="true">
+              <a href="{{route('status.edit')}}" class="m-menu__link m-menu__toggle"
+                  ><i class="m-menu__link-icon fa fa-file"></i
+                  ><span class="m-menu__link-text">Data Instansi</span></a
                 >
               </li>
               @endif

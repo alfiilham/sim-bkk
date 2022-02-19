@@ -23,6 +23,10 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return $this->hasOne(Siswa::class);
     }
+    public function dataInstansi()
+    {
+        return $this->hasOne(Instansi::class, 'nama' , 'name');
+    }
      public function latestData()
     {
         return $this->hasOne(dataStatus::class)->latest();

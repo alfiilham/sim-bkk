@@ -105,6 +105,21 @@ class HomeController extends Controller
     }
 
     public function updateProfile(request $request){
+        if(auth::user()->role == 'instansi'){
+            $user = User::where('id',auth::user()->id);
+            $instansi = Instansi::where('nama',auth::user()->dataInstansi->nama);
+            $user->update([
+                'name' => $request->nama,
+                'email' => $request->email
+            ]);
+            $instansi->update([
+                'nama' => $request->nama,
+                'kota' => $request->kota,
+                'alamat' => $request->alamat,
+                'telp' => $request->telp,
+            ]);
+            return redirect()->back()->with('success',['Data Berhasil Diupdate']);
+        }
         $user = User::where('id',auth::user()->id);
         $siswa = siswa::where('user_id',auth::user()->id);
         if($request->status != $siswa->first()->status_id){

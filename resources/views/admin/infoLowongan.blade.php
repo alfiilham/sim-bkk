@@ -113,7 +113,7 @@
     return '<div class="jurusan">'+id+'</div>';
   },
 },
-  {data: 'instansi',
+  {data:"instansi",
   "searchable": false,
   "sortable": false,
   render: function (id, type, full, meta) {

@@ -68,6 +68,7 @@
                 </div>
                 @endforeach
               </div>
+              @can('admin')
               <h5><label id="instansi" class="form-control-label col-lg-12 mt-4">Instansi</label></h5>
               <div class="col-lg-12">
                 <select class="form-control" aria-label="Default select example" name="instansi">
@@ -76,6 +77,7 @@
                   @endforeach
                 </select>
               </div>
+              @endcan
               <div class="col-lg-12 mt-4">
                 <button type="input" class="btn {{$preset->buttonClass}}">Save Data</button>
               </div>

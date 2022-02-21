@@ -4,7 +4,7 @@ namespace App\Http\Middleware;
 use Illuminate\Support\Facades\Auth;
 use Closure;
 
-class Admin
+class Instansi
 {
     /**
      * Handle an incoming request.
@@ -15,13 +15,9 @@ class Admin
      */
     public function handle($request, Closure $next)
     {
-        if (Auth::user() &&  Auth::user()->role == 'admin') {
+        if (Auth::user() &&  Auth::user()->role == 'instansi') {
             return $next($request);
         }
-        elseif(Auth::user() &&  Auth::user()->role == 'instansi'){
-            return $next($request);
-        }
-
     return redirect('/home');
     }
 }

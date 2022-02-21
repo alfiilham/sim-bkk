@@ -6,9 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class InfoLowongan extends Model
 {
-    public function Instasi()
+    public function Instansi()
     {
-        dd($this->hasOne(Instansi::class, 'id' , 'instansi'));
+        return $this->hasOne(Instansi::class, 'nama' , 'instansi');
     }
     protected $fillable = [
     	'judul','isi','foto','active','jurusan','instansi'

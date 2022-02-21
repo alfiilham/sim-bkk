@@ -641,6 +641,13 @@
                   ><span class="m-menu__link-text">Data Instansi</span></a
                 >
               </li>
+
+              <li class="m-menu__item @yield('infolowongan')" aria-haspopup="true">
+              <a href="{{url('/infolowongan')}}" class="m-menu__link m-menu__toggle"
+                  ><i class="m-menu__link-icon la la-industry"></i
+                  ><span class="m-menu__link-text">Informasi Lowongan</span></a
+                >
+              </li>
               @endif
             </ul>
           </div>

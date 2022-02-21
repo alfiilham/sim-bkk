@@ -10,6 +10,7 @@ use DataTables;
 use File;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 
 class InfoLowonganController extends Controller
 {
@@ -21,13 +22,14 @@ class InfoLowonganController extends Controller
 
     public function __construct()
     {
-        $this->middleware(['auth','admin']);
+        $this->middleware(['auth']);
     }
 
     public function index()
     {
+        $datas = InfoLowongan::all();
         $preset = preset::where('status','active')->first();
-        return view('admin.infoLowongan',compact('preset'));
+        return view('admin.infoLowongan',compact('preset','datas'));
     }
 
     /**
@@ -38,6 +40,9 @@ class InfoLowonganController extends Controller
 
     public function json()
     {
+        if(Auth::user()->role == 'instansi'){
+            return Datatables::of(InfoLowongan::where('instansi', Auth::user()->dataInstansi->nama)->get())->make(true);
+        }
         return Datatables::of(InfoLowongan::all())->make(true);
     }
 
@@ -77,6 +82,17 @@ class InfoLowonganController extends Controller
         $file = $request->file('foto');
         $nama_file = $request->judul."_".$file->getClientOriginalName();
         $file->move($path,$nama_file);
+        if(Auth::user()->role == 'instansi'){
+            InfoLowongan::create([
+                'instansi' =>Auth::user()->dataInstansi->nama,
+                'jurusan' =>$request->jurusan,
+                'judul' => $request->judul,
+                'isi' => $request->isi,
+                'foto' => $nama_file,
+                'status' => 'Aktif'
+            ]); 
+            return redirect('/infolowongan');
+        }
         InfoLowongan::create([
             'instansi' =>$request->instansi,
             'jurusan' =>$request->jurusan,
@@ -134,7 +150,6 @@ class InfoLowonganController extends Controller
         $lowongan->judul = $request->judul;
         $lowongan->isi = $request->isi;
         $lowongan->jurusan = $request->jurusan;
-        $lowongan->instansi = $request->instansi;
         if ($request->hasFile('foto')) {
             $gambar = InfoLowongan::where('id',$id)->first();
 	        File::delete('image/InfoLowongan/'.$gambar->foto);
@@ -145,6 +160,11 @@ class InfoLowonganController extends Controller
             $file->move($path,$nama_file);
             $lowongan->foto = $nama_file;
         }
+        if(Auth::user()->role == 'instansi'){
+            $lowongan->save();
+        return redirect('/infolowongan');
+        }
+        $lowongan->instansi = $request->instansi;
         $lowongan->save();
 
         return redirect('/infolowongan');

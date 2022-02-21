@@ -15,6 +15,8 @@ class CreateInfoLowongansTable extends Migration
     {
         Schema::create('info_lowongans', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->longText('instansi');
+            $table->longText('jurusan');
             $table->longText('judul');
             $table->longText('isi');
             $table->longText('foto');

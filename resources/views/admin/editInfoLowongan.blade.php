@@ -34,7 +34,6 @@
 
           </div>
           <div class="m-portlet__body">
-          @foreach($data as $d)
           <form method="post" action="/editinfolowongan/update;{{$d->id}}" enctype="multipart/form-data" class="form-horizontal">
           {{ csrf_field() }}
             <div class="form-group m-form__group row">
@@ -54,14 +53,34 @@
                 <img src="/image/infolowongan/{{$d->foto}}" id="previewHolder" alt=" Preview" width="150px" height="150px"/>
               </div>
               <div class="col-lg-12">
-                <input type="file" name="foto" id="filePhoto" class="form-control m-input" required>
+                <input type="file" name="foto" id="filePhoto" class="form-control m-input">
+              </div>
+              <h5><label id="jurusan" class="form-control-label col-lg-12 mt-4">For Jurusan</label></h5>
+              <div class="col-lg-12">
+                @foreach($jurusans as $jurusan)
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" value="{{$jurusan->short}}" id="jurusan" name="jurusan[]" 
+                    <?php for ( $i=0; $i < count($checkjurusan); $i++) { if($checkjurusan[$i] == $jurusan->short) { echo 'checked'; }
+                    } ?>>
+                  <label class="form-check-label" for="defaultCheck1">
+                    {{$jurusan->jurusan}}
+                  </label>
+                </div>
+                @endforeach
+              </div>
+              <h5><label id="instansi" class="form-control-label col-lg-12 mt-4">Instansi</label></h5>
+              <div class="col-lg-12">
+                <select class="form-control" aria-label="Default select example" name="instansi">
+                  @foreach($instansis as $instansi)
+                    <option value="{{$instansi->nama}}" <?php if($instansi->nama == $d->instansi) { echo 'selected'; }?>>{{$instansi->nama}}</option>
+                  @endforeach
+                </select>
               </div>
               <div class="col-lg-12 mt-4">
                 <button type="input" class="btn {{$preset->buttonClass}}">Save Data</button>
               </div>
             </div>
           </form>
-          @endforeach
           </div>
         </div>
       </div>

@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\InfoLowongan;
+use App\Jurusan;
+use App\Instansi;
 use App\Preset;
 use DataTables;
 use File;
@@ -36,7 +38,6 @@ class InfoLowonganController extends Controller
 
     public function json()
     {
-       
         return Datatables::of(InfoLowongan::all())->make(true);
     }
 
@@ -54,8 +55,10 @@ class InfoLowonganController extends Controller
     
     public function create()
     {
+        $jurusans = Jurusan::all();
+        $instansis = Instansi::all();
         $preset = preset::where('status','active')->first();
-        return view('admin.inputInfoLowongan',compact('preset'));
+        return view('admin.inputInfoLowongan',compact('preset','jurusans','instansis'));
     }
 
     /**
@@ -66,13 +69,17 @@ class InfoLowonganController extends Controller
      */
     public function store(Request $request)
     {
+        $request->merge([ 
+            'jurusan' => implode(',', (array) $request->get('jurusan'))
+        ]);
         $path = public_path().'/image/InfoLowongan/';
         File::makeDirectory($path, $mode = 0777, true, true);
         $file = $request->file('foto');
         $nama_file = $request->judul."_".$file->getClientOriginalName();
         $file->move($path,$nama_file);
-
         InfoLowongan::create([
+            'instansi' =>$request->instansi,
+            'jurusan' =>$request->jurusan,
     		'judul' => $request->judul,
             'isi' => $request->isi,
             'foto' => $nama_file,
@@ -101,9 +108,14 @@ class InfoLowonganController extends Controller
      */
     public function edit($id)
     {
+        $instansis = Instansi::all();
+        $jurusans = Jurusan::all();
         $preset = preset::where('status','active')->first();
         $data = InfoLowongan::where('id',$id)->get();
-        return view('admin.editInfoLowongan',compact('preset','data'));
+        foreach($data as $d){     
+        }
+        $checkjurusan = explode("," , $d->jurusan);
+        return view('admin.editInfoLowongan',compact('preset','d','jurusans','checkjurusan','instansis'));
     }
 
     /**
@@ -115,9 +127,14 @@ class InfoLowonganController extends Controller
      */
     public function update($id, Request $request)
     {
+        $request->merge([ 
+            'jurusan' => implode(',', (array) $request->get('jurusan'))
+        ]);
         $lowongan = InfoLowongan::find($id);
         $lowongan->judul = $request->judul;
         $lowongan->isi = $request->isi;
+        $lowongan->jurusan = $request->jurusan;
+        $lowongan->instansi = $request->instansi;
         if ($request->hasFile('foto')) {
             $gambar = InfoLowongan::where('id',$id)->first();
 	        File::delete('image/InfoLowongan/'.$gambar->foto);

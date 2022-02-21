@@ -53,8 +53,10 @@
                 <tr>
                   <th style="width:10px">No</th>
                   <th>Judul</th>
-                  <th style="width:300px">Isi</th>
+                  <th style="width:100px">Isi</th>
                   <th style="width:100px">Foto</th>
+                  <th style="width:100px">Jurusan</th>
+                  <th style="width:100px">Instansi</th>
                   <th style="width:100px">Status</th>
                   <th style="width:140px">Action</th>
                 </tr>
@@ -102,6 +104,20 @@
   "sortable": false,
   render: function (id, type, full, meta) {
     return '<img src="/image/infolowongan/'+id+'" alt="'+id+'" height="100" width="100">';
+  },
+},
+  {data: "jurusan",
+  "searchable": false,
+  "sortable": false,
+  render: function (id, type, full, meta) {
+    return '<div class="jurusan">'+id+'</div>';
+  },
+},
+  {data: 'instansi',
+  "searchable": false,
+  "sortable": false,
+  render: function (id, type, full, meta) {
+    return '<div class="instansi">'+id+'</div>';
   },
 },
   {data: 'status'},

@@ -14,7 +14,7 @@ class Alumni extends Seeder
     {
          $faker = Faker::create('id_ID');
 
-    	for($i = 1; $i <= 350; $i++){
+    	for($i = 1; $i <= 10; $i++){
     	$gender = $faker->randomElement(['Laki-laki', 'Perempuan']);
     	$thn = $faker->randomElement(['2013','2014','2015','2016','2017']);
     	      // insert data ke table pegawai menggunakan Faker

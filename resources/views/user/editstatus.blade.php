@@ -4,13 +4,29 @@
 @section('content')
 <div class="container">
     <br>
-    @if ($message = Session::get('success'))
-        <div class="alert alert-success alert-dismissible fade show" role="alert">
-  <strong>Update Sukses</strong> data anda berhasil di update
-  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-    <span aria-hidden="true">&times;</span>
-  </button>
-</div>
+    @if(auth::user()->email == null)
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+          <strong>Email Blom diInput</strong> silahkan input email untuk mendapatkan nontifikasi
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        @endif
+        @if(auth::user()->email_verified_at == null && auth::user()->email != null)
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+          <strong>Email Blom terverifikasi</strong> silahkan verifikasi email
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        @endif
+        @if ($message = Session::get('success'))
+              <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <strong>Update Sukses</strong> data anda berhasil di update
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
         @endif
 {{-- <a href=" user/{{auth::user()->data->id}}/edit/" class="btn {{$preset->buttonClass}} mb-4">Edit Data Belum Lengkap</a>   --}}
 <div class="accordion" id="accordionExample">
@@ -56,7 +72,10 @@
                           <div class="col-md-12">
                       <div class="form-group">
                         <label for="">Email</label>
-                         <input placeholder="Email" name="email" class="form-control" value="{{auth::user()->email}}">
+                         <input placeholder="Email" name="email" class="form-control" value="{{auth::user()->email}}" required>
+                         @if(auth::user()->email_verified_at == null && auth::user()->email != null )
+                         <button class="btn {{$preset->buttonClass}} mt-3"  name="submit" value="verifikasi">Verifikasi Email</button>
+                          @endif
                       </div>
                           </div>
                           <div class="col-md-12">
@@ -99,7 +118,7 @@
                         </div>
                       {{-- End Row --}}
                       </div>
-                      <button class="btn {{$preset->buttonClass}}">Update</button>
+                      <button class="btn {{$preset->buttonClass}}" name="submit" value="update">Update</button>
                       {{-- End --}}
                     </div>
                 </form>

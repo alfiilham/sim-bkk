@@ -27,12 +27,12 @@ class reminder extends Mailable
      */
     public function build()
     {
-        return $this->from('wikrama.bkk@gmail.com')
-                   ->view('emails.reminder')
-                   ->with(
-                    [
-                        'nama' => 'Admin BKK',
-                        'website' => 'www.simbkk.com',
-                    ]);
+    return $this->subject('test')
+                ->view('emails.reminder')
+                ->with(
+                [
+                'nama' => 'Admin BKK',
+                'website' => 'www.simbkk.com',
+                ]);
     }
 }

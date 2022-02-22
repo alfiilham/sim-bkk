@@ -18,7 +18,7 @@ class Instansi extends Seeder
             'nama'=> null,
             'kota'=>null,
             ]);
-        for($i=1;$i<=100;$i++){
+        for($i=1;$i<=10;$i++){
             db::table('instansis')->insert([
             'alamat'=>$faker->streetAddress,
             'nama'=> $faker->company(),

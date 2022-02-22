@@ -68,16 +68,16 @@
                 </div>
                 @endforeach
               </div>
-              @can('admin')
+              @if(Auth::user()->role == "admin")
               <h5><label id="instansi" class="form-control-label col-lg-12 mt-4">Instansi</label></h5>
               <div class="col-lg-12">
                 <select class="form-control" aria-label="Default select example" name="instansi">
                   @foreach($instansis as $instansi)
-                    <option value="{{$instansi->nama}}" <?php if($instansi->nama == $d->instansi) { echo 'selected'; }?>>{{$instansi->nama}}</option>
+                    <option value="{{$instansi->id}}" <?php if($instansi->id == $d->instansi) { echo 'selected'; }?>>{{$instansi->nama}}</option>
                   @endforeach
                 </select>
               </div>
-              @endcan
+              @endif
               <div class="col-lg-12 mt-4">
                 <button type="input" class="btn {{$preset->buttonClass}}">Save Data</button>
               </div>

@@ -4,13 +4,17 @@ namespace App\Http\Controllers;
 
 use App\InfoLowongan;
 use App\Jurusan;
+use App\User;
 use App\Instansi;
 use App\Preset;
+use App\DataSiswa;
 use DataTables;
 use File;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\reminder;
 
 class InfoLowonganController extends Controller
 {
@@ -27,9 +31,8 @@ class InfoLowonganController extends Controller
 
     public function index()
     {
-        $datas = InfoLowongan::all();
         $preset = preset::where('status','active')->first();
-        return view('admin.infoLowongan',compact('preset','datas'));
+        return view('admin.infoLowongan',compact('preset'));
     }
 
     /**
@@ -41,9 +44,19 @@ class InfoLowonganController extends Controller
     public function json()
     {
         if(Auth::user()->role == 'instansi'){
-            return Datatables::of(InfoLowongan::where('instansi', Auth::user()->dataInstansi->nama)->get())->make(true);
+            $model = InfoLowongan::with('Instansi')->where('instansi',Auth::user()->dataInstansi->id);
+            return DataTables::eloquent($model)
+                ->addColumn('instansi', function (InfoLowongan $infolowongan) {
+                    return $infolowongan->Instansi->nama;
+                })
+                ->make(true);
         }
-        return Datatables::of(InfoLowongan::all())->make(true);
+            $model = InfoLowongan::with('Instansi');
+            return DataTables::eloquent($model)
+                ->addColumn('instansi', function (InfoLowongan $infolowongan) {
+                    return $infolowongan->Instansi->nama;
+                })
+                ->make(true);
     }
 
     public function active($id)
@@ -84,13 +97,25 @@ class InfoLowonganController extends Controller
         $file->move($path,$nama_file);
         if(Auth::user()->role == 'instansi'){
             InfoLowongan::create([
-                'instansi' =>Auth::user()->dataInstansi->nama,
+                'instansi' =>Auth::user()->dataInstansi->id,
                 'jurusan' =>$request->jurusan,
                 'judul' => $request->judul,
                 'isi' => $request->isi,
                 'foto' => $nama_file,
                 'status' => 'Aktif'
-            ]); 
+            ]);
+            $jurusan = explode(',',$request->jurusan);
+            for ($i=0; $i < count($jurusan) ; $i++) { 
+                $email[$i] = Datasiswa::select('email','user_id')->User()->where([['short',$jurusan[$i]],['email','!=','Belum Diisi']])->get();
+            }
+            for ($a=0; $a < count($email) ; $a++) { 
+                for ($b=0; $b < count($email[$a]) ; $b++) { 
+                    $hasil[$a] = $email[$a][$b]->email;
+                }
+            }
+            for ($s=0; $s < count($hasil) ; $s++) { 
+                Mail::to($hasil[$s])->send(new reminder);
+            }
             return redirect('/infolowongan');
         }
         InfoLowongan::create([
@@ -101,7 +126,7 @@ class InfoLowonganController extends Controller
             'foto' => $nama_file,
             'status' => 'Aktif'
         ]);
-
+        
         return redirect('/infolowongan');
     }
 

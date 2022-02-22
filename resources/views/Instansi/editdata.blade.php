@@ -4,13 +4,21 @@
 @section('content')
 <div class="container">
     <br>
-    @if ($message = Session::get('success'))
+    @if(auth::user()->email == null || auth::user()->dataInstansi->telp == null )
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+          <strong>Data Belom Lengkap</strong> silahkan lengkapi data
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        @endif
+      @if($message = Session::get('success'))
         <div class="alert alert-success alert-dismissible fade show" role="alert">
-  <strong>Update Sukses</strong> data anda berhasil di update
-  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-    <span aria-hidden="true">&times;</span>
-  </button>
-</div>
+          <strong>Update Sukses</strong> data anda berhasil di update
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
         @endif
 {{-- <a href=" user/{{auth::user()->data->id}}/edit/" class="btn {{$preset->buttonClass}} mb-4">Edit Data Belum Lengkap</a>   --}}
 <div class="accordion" id="accordionExample">
@@ -61,8 +69,11 @@
                             <div class="col-md-12">
                               <div class="form-group">
                                 <label for="">Email</label>
-                                <input placeholder="Email" name="email" class="form-control" value="{{auth::user()->email}}">
+                                <input placeholder="Email" name="email" class="form-control" value="{{auth::user()->email}}" required>
                               </div>
+                              @if(auth::user()->email_verified_at == null && auth::user()->email != null )
+                              <a href="email/verify" class="btn {{$preset->buttonClass}}">Verifikasi email</a>
+                              @endif
                             </div>
                             <div class="col-md-12">
                               <div class="form-group">

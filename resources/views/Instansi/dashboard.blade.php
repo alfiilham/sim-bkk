@@ -20,7 +20,13 @@
                             <h5 class="card-title">Telepon</h5>
                             <p class="card-text">{{auth::user()->dataInstansi->telp}}</p>
                             <h5 class="card-title">Email</h5>
-                            <p class="card-text">{{auth::user()->email}} <i><b> Verified </b></i> </p>
+                            <p class="card-text">{{auth::user()->email}} <i>
+                            @if(auth::user()->email_verified_at != null)
+                            <b> Verified </b>
+                            @else
+                            <b class="text-danger"> Not Verified </b>
+                            @endif
+                            </i></p>
                         </div>
                     </div>
                 </div>

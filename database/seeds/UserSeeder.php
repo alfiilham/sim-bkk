@@ -23,17 +23,17 @@ class UserSeeder extends Seeder
         'foto'=>'admin.jpg',
         'email_verified_at' => Carbon::now(),
         ]);
-        for($i = 1; $i <= 350; $i++){
+        for($i = 1; $i <= 10; $i++){
             db::table('users')->insert([
                 'name'=> $faker->name(),
                 'username'=> '1170'. (6000+$i),
-                'email'=> $faker->unique()->email,
+                'email'=> null,
                 'password'=> Hash::make( '1170'. (6000+$i) ) ,
                 'role'=>'alumni',
                 'foto'=>'default.png'
                 ]);
         }
-        for($a = 2; $a <= 100; $a++){
+        for($a = 2; $a <= 10; $a++){
             $data = db::table('instansis')->select('nama')->where('id',$a)->get();
             foreach($data as $nama){}
             $lowername = strtolower($nama->nama);
@@ -42,7 +42,7 @@ class UserSeeder extends Seeder
             db::table('users')->insert([
                 'name'=> $nama->nama,
                 'username'=> $nospasi,
-                'email'=> $nospasi.'@gmail.com',
+                'email'=> null,
                 'password'=> Hash::make($nospasi),
                 'role'=>'instansi',
                 'foto'=>'default.png'

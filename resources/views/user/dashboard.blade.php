@@ -14,7 +14,14 @@
                             <h5 class="card-title">Alamat</h5>
                             <p class="card-text">{{auth::user()->data->alamat}}</p>
                             <h5 class="card-title">Email</h5>
-                            <p class="card-text">{{auth::user()->email}} <i><b> Verified </b></i> </p>
+                            <p class="card-text">{{auth::user()->email}} <i>
+                            @if(auth::user()->email_verified_at != null)
+                            <b> Verified </b>
+                            @else
+                            <b class="text-danger"> Not Verified </b>
+                            @endif
+                            </i> 
+                            </p>
                         </div>
                         <div class="col-md-6">
                             <h5 class="card-title">Telepon</h5>

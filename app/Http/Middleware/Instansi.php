@@ -18,6 +18,9 @@ class Instansi
         if (Auth::user() &&  Auth::user()->role == 'instansi') {
             return $next($request);
         }
+        elseif(Auth::user() &&  Auth::user()->role == 'admin') {
+            return $next($request);
+        }
     return redirect('/home');
     }
 }

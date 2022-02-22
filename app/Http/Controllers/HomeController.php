@@ -94,13 +94,19 @@ class HomeController extends Controller
             }
         }elseif(auth::user()->role == 'instansi'){
             $preset = preset::where('status','active')->first();
-            return view('dashboard',compact('preset','company'));
+            if(auth::user()->email == null){
+                return view('instansi.editdata',compact('preset'));
+            }
+            return view('dashboard',compact('preset'));
         }else{
             $formNon = 'admin';
         }
 
         $preset = preset::where('status','active')->first();
         // end chart jejak alumni
+        if(auth::user()->email == null){
+            return view('user.editstatus',compact('jejakAlumni','preset','company','formNon','rayon','jejakJurusan','jurusan','siswa','kerja','kuliah','wirausaha','belumInput','status'));
+        }
         return view('dashboard',compact('jejakAlumni','preset','company','formNon','rayon','jejakJurusan','jurusan','siswa','kerja','kuliah','wirausaha','belumInput','status'));
     }
 
@@ -128,6 +134,12 @@ class HomeController extends Controller
             'status_id' => $request->status,
             'id_instansi' => '1',
         ]);
+        }
+        if($request->submit == "verifikasi"){
+            $siswa->update([
+                'email' => $request->email
+            ]);
+            return redirect('/email/verify');
         }
         $user->update([
             'name' => $request->nama,

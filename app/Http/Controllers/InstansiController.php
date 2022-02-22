@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Instansi;
+use App\User;
 use DataTables;
 use App\Preset;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
 
 class InstansiController extends Controller
@@ -17,7 +19,7 @@ class InstansiController extends Controller
 
     public function __construct()
     {
-        $this->middleware(['auth','admin']);
+        $this->middleware(['auth','admin','instansi']);
     }
     public function index()
     {
@@ -49,6 +51,11 @@ class InstansiController extends Controller
      */
     public function store(Request $request)
     {
+        $lowername = strtolower($request->nama);
+        $result = preg_replace("/[^a-zA-Z]/", "", $lowername);
+        $nospasi = str_replace(' ', '', $result);
+        $user = User::updateOrCreate(['id' => $request->user_id],
+            ['name' => $request->nama, 'username' => $nospasi, 'password' => Hash::make($nospasi), 'role' => 'instansi']);
         Instansi::updateOrCreate(['id' => $request->id],
             ['nama' => $request->nama, 'alamat' => $request->alamat, 'kota' => $request->kota]);
         return response()->json();

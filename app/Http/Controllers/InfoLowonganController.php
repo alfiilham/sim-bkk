@@ -106,7 +106,7 @@ class InfoLowonganController extends Controller
             ]);
             $jurusan = explode(',',$request->jurusan);
             for ($i=0; $i < count($jurusan) ; $i++) { 
-                $email[$i] = Datasiswa::select('email','user_id')->User()->where([['short',$jurusan[$i]],['email','!=','Belum Diisi']])->get();
+                $email[$i] = Datasiswa::select('email','user_id')->where([['short',$jurusan[$i]],['email','!=','Belum Diisi'],['email_verified_at','!=',null]])->get();
             }
             for ($a=0; $a < count($email) ; $a++) { 
                 for ($b=0; $b < count($email[$a]) ; $b++) { 

@@ -136,9 +136,6 @@ class HomeController extends Controller
         ]);
         }
         if($request->submit == "verifikasi"){
-            $siswa->update([
-                'email' => $request->email
-            ]);
             return redirect('/email/verify');
         }
         $user->update([
@@ -148,6 +145,7 @@ class HomeController extends Controller
         $siswa->update([
             'alamat' => $request->alamat,
             'telp' => $request->telp,
+            'email' => $request->email,
             'jk' => $request->jk,
             'status_id'=> $request->status
         ]);

@@ -113,8 +113,9 @@ class InfoLowonganController extends Controller
                     $hasil[$a] = $email[$a][$b]->email;
                 }
             }
+            $isi = $request->isi;
             for ($s=0; $s < count($hasil) ; $s++) { 
-                Mail::to($hasil[$s])->send(new reminder);
+                Mail::to($hasil[$s])->send(new reminder($isi));
             }
             return redirect('/infolowongan');
         }

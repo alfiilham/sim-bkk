@@ -15,9 +15,11 @@ class reminder extends Mailable
      *
      * @return void
      */
-    public function __construct()
+
+    private $isi;
+    public function __construct($isi)
     {
-       
+        $this->isi = $isi;
     }
 
     /**
@@ -31,7 +33,8 @@ class reminder extends Mailable
                 ->view('emails.reminder')
                 ->with(
                 [
-                'nama' => 'Admin BKK',
+                'nama'=>'Loker Nih',
+                'content' => $this->isi,
                 'website' => 'www.simbkk.com',
                 ]);
     }

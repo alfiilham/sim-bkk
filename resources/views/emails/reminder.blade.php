@@ -1,4 +1,5 @@
 <div>
 <h3>Halo, {{ $nama }} !</h3>
-<p>{{ $website }}</p>
+<p>{!! $content !!}</p>
+<p>{{$website}}</p>
 </div>

@@ -76,6 +76,10 @@
                 </select>
               </div>
               @endif
+              <h5><label id="date" class="form-control-label col-lg-12 mt-4">Tanggal Berakhir</label></h5>
+              <div class="col-lg-12">
+                <input type="text" name="date" id="datepicker" class="form-control m-input">
+              </div>
               <div class="col-lg-12 mt-4">
                 <button type="input" class="btn {{$preset->buttonClass}}">Save Data</button>
               </div>
@@ -93,6 +97,7 @@
 </div>
 </div>
 <script src="https://cdn.tiny.cloud/1/6qed0blc4b73g5p5uwh7acq07ay1sli0skekw9shc6wz2sbc/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+<script src="https://momentjs.com/downloads/moment.js"></script>
 <script>
    tinymce.init({
   selector: 'textarea',
@@ -121,6 +126,13 @@ function readURL(input) {
 $("#filePhoto").change(function() {
   readURL(this);
 });
+</script>
+<script>
+  $( function() {
+    $("#datepicker").datepicker({                  
+        minDate: moment().add('d', 1).toDate(),
+    });
+  } );
 </script>
 @include('layouts.footer')
 @endsection

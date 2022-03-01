@@ -98,8 +98,9 @@ class daftarLowonganController extends Controller
      * @param  \App\daftarLowongan  $daftarLowongan
      * @return \Illuminate\Http\Response
      */
-    public function destroy(daftarLowongan $daftarLowongan)
+    public function destroy($id)
     {
-        //
+        daftarLowongan::find($id)->delete();
+        return response()->json();
     }
 }

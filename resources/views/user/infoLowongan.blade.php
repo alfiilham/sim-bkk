@@ -209,7 +209,12 @@
             })
           },
           error: function (data) {
-            console.log('Error:', data);
+            swal({
+              title: 'Anda Sudah Daftar',
+              type: 'warning',
+              showConfirmButton: false,
+              timer: 1500,
+            })
           }
         });
       })

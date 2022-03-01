@@ -135,15 +135,10 @@ class InfoLowonganController extends Controller
                 }
             }
             $isi = $request->isi;
-<<<<<<< HEAD
-            for ($s=0; $s < count($hasil) ; $s++) { 
-                Mail::to($hasil[$s])->send(new reminder($isi));
-=======
             if($hasil[0] != null){
                 for ($s=0; $s < count($hasil) ; $s++) { 
                     Mail::to($hasil[$s])->send(new reminder($isi));
                 }
->>>>>>> 7f84ccd4d94796d53af23e5afb9c26a39edb54a7
             }
         return redirect('/infolowongan');
     }
@@ -232,12 +227,15 @@ class InfoLowonganController extends Controller
         return DataTables::eloquent($response)->toJson();
     }
     public function daftar(Request $request){
-        return daftarLowongan::create([
-            'user_id' => Auth::user()->id,
-            'jurusan_id' => Auth::user()->datasiswa->jurusan_id,
-            'infoLowongan_id' => $request->id,
-            'instansi_id' => $request->idInstansi,
-            'status' => 'Proses',
-        ]);
+        if(daftarLowongan::where([['user_id',Auth::user()->id],['infoLowongan_id',$request->id]])->first() == null){
+            return daftarLowongan::create([
+                'user_id' => Auth::user()->id,
+                'jurusan_id' => Auth::user()->datasiswa->jurusan_id,
+                'infoLowongan_id' => $request->id,
+                'instansi_id' => $request->idInstansi,
+                'status' => 'Proses',
+            ]);
+        }
+        return redirect()->back();
     }
 }

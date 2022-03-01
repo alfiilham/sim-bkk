@@ -113,7 +113,45 @@
   },
 },
 ],
-
+});
+$(document).on('click','#delete',function(){
+  swal({
+  title: 'Apakah Anda yakin?',
+  type: 'warning',
+  showCancelButton: true,
+  confirmButtonText: 'Ya',
+  cancelButtonText: 'Tidak'
+}).then((result) => {
+  if (result.value) {
+    var id = $(this).data("id");
+  var token = $("meta[name='csrf-token']").attr("content");
+  $.ajaxSetup({
+    headers: {
+      'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
+    }
+  })
+  $.ajax({
+    type: "DELETE",
+    url: "daftarlowongan/delete/"+id,
+    data: {
+      "id": id,
+      "_token": token,
+    },
+    success: function (data) {
+      table.draw();
+      swal({
+          title: 'Data Terhapus!',
+          type: 'success',
+          showConfirmButton: false,
+          timer: 1500,
+      })
+    },
+    error: function (data) {
+      console.log('Error:', data);
+    }
+  });
+  }
+});
 });
 </script>
 @include('layouts.footer')

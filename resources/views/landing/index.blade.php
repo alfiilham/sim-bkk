@@ -72,26 +72,43 @@
 }
 
 </style>
-<!-- Jumbotron -->
-<div class="card card-image" style="background-image: url(landing/images/bg1.jpg);height:500px;">
-  <div class="text-white text-center rgba-stylish-strong py-5 px-4 mt-6">
-    <div class="py-5">
-
-      <!-- Content -->
-      <h2 class="card-title text-black h2">Sistem Informasi Bursa Kerja Khusus</h2>
-      <h5 class="h5 text-black mb-4">SMK WIKRAMA BOGOR</h5>
-      @guest
-    <a href="{{route('login')}}" class="btn peach-gradient hover-login">Login</a>
-      @else
-      <a href="{{route('home')}}" class="btn peach-gradient hover-login">Dashboard</a>
-      @endguest
-    </div>
-  </div>
+ <!-- ======= Hero Section ======= -->
+ <section id="hero" class="hero d-flex align-items-center">
+ 
+   <div class="container">
+     <div class="row">
+       <div class="col-lg-6 d-flex flex-column justify-content-center">
+         <h1 data-aos="fade-up">Sistem Informasi Bursa Kerja Khusus</h1>
+         <h2 data-aos="fade-up" data-aos-delay="400">Platform pendataan karier siswa/i alumni SMK Wikrama Bogor</h2>
+         <div data-aos="fade-up" data-aos-delay="600">
+           <div class="text-center text-lg-start">
+             @guest
+             <a href="{{route('login')}}" class="btn-get-started scrollto d-inline-flex align-items-center justify-content-center align-self-center" style="text-decoration:none">
+               <span>Login</span>
+               <i class="bi bi-arrow-right"></i>
+             </a>
+             @else
+             <a href="{{route('home')}}" class="btn-get-started scrollto d-inline-flex align-items-center justify-content-center align-self-center" style="text-decoration:none">
+               <span>Dashboard</span>
+               <i class="bi bi-arrow-right"></i>
+             </a>
+             @endguest
+           </div>
+         </div>
+       </div>
+       <div class="col-lg-6 hero-img" data-aos="zoom-out" data-aos-delay="200">
+         <img src="image/config/hero-bg.png" class="img-fluid" alt="">
+       </div>
+     </div>
+   </div>
+ 
+ </section><!-- End Hero -->
 </div>
 <!-- Jumbotron -->
   {{-- Informasi Loker --}}
       <div class="row">
-          <div class="col-md-12 mt-6">
+        
+      <div class="col-md-12 mt-6">
                         <div class="container">
                           <div class="row">
                             <div class="col-lg-8">
@@ -164,7 +181,7 @@
 
                               {{-- More --}}
                               <p>
-                                    <a href="{{url('/form-full-sekolah')}}" class="more">Lainnya<span class="icon-keyboard_arrow_right"></span></a>
+                                    <a href="{{url('/form-full-sekolah')}}" class="more" style="text-decoration:none; color:#0C446C">Lainnya<span class="icon-keyboard_arrow_right"></span></a>
                                   </p>
                               {{-- End More --}}
                             </div>

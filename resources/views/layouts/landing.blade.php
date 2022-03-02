@@ -14,6 +14,14 @@
 
   <link rel="stylesheet" href="landing/css/bootstrap.min.css">
   <link rel="stylesheet" href="landing/css/jquery-ui.css">
+  <link rel="stylesheet" href="css/app.css">
+  <!-- Vendor CSS Files -->
+  <link href="vendor/vendor/aos/aos.css" rel="stylesheet">
+  <link href="vendor/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="vendor/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="vendor/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+  <link href="vendor/vendor/remixicon/remixicon.css" rel="stylesheet">
+  <link href="vendor/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
   <link rel="stylesheet" href="landing/css/owl.carousel.min.css">
   <link rel="stylesheet" href="landing/css/owl.theme.default.min.css">
   <link rel="stylesheet" href="landing/css/owl.theme.default.min.css">
@@ -36,80 +44,29 @@
 
 </head>
 
-<body data-spy="scroll" data-target=".site-navbar-target" data-offset="300">
-
-  <div class="site-wrap">
-
-    <div class="site-mobile-menu site-navbar-target">
-      <div class="site-mobile-menu-header">
-        <div class="site-mobile-menu-close mt-3">
-          <span class="icon-close2 js-menu-toggle"></span>
-        </div>
-      </div>
-      <div class="site-mobile-menu-body"></div>
-    </div>
-
-    <div class="header-top">
-      <div class="container">
-        <div class="row align-items-center">
-          <div class="col-12 col-lg-6 d-flex">
-            <a href="{{url('/')}}" class="site-logo">
-              @yield('title')
-            </a>
-
-            <a href="#" class="ml-auto d-inline-block d-lg-none site-menu-toggle js-menu-toggle text-black"><span
-                class="icon-menu h3"></span></a>
-
-          </div>
-          <div class="col-12 col-lg-6 ml-auto d-flex">
-            
-            
-
-            
-          </div>
-          <div class="col-6 d-block d-lg-none text-right">
-            
-          </div>
-        </div>
-      </div>
-          
-      <div class="site-navbar py-2 js-sticky-header site-navbar-target d-none pl-0 d-lg-block" role="banner">
-
-      <div class="container">
-        <div class="d-flex align-items-center">
-          
-          <div class="mr-auto">
-            <nav class="site-navigation position-relative text-right" role="navigation">
-              <ul class="site-menu main-menu js-clone-nav mr-auto d-none pl-0 d-lg-block">
-                <li class="active">
-                  <a href="/" class="nav-link text-left">Beranda</a>
-                </li>
-                <li>
-                  @guest
-                  <a href="{{url('login')}}" class="nav-link text-left">Login</a>
-                  @else
-                  <a href="{{route('home')}}" class="nav-link text-left">Dashboard</a>
-                   @endguest
-                </li>
-                <li>
-                  <a href="{{url('/form-full-lowongan')}}" class="nav-link text-left">Informasi Lowongan Kerja</a>
-                </li>
-                <li>
-                  <a href="{{url('/form-full-sekolah')}}" class="nav-link text-left">Informasi Sekolah</a>
-                </li>
-                <li>
-                    <a href="#pesan" class="nav-link text-left">Pesan</a>
-                </li>
-            </nav>
-
-          </div>
-        </div>
-      </div>
-      
-    </div>
-    
-    </div>
-  </div>
+<body>
+<!-- ======= Header ======= -->
+<header id="header" class="header fixed-top">
+   <div class="container-fluid container-xl d-flex align-items-center justify-content-between">
+ 
+     <a href="{{url('/')}}" class="logo d-flex align-items-center" style="text-decoration:none">
+       <img src="image/config/logo/wk.png" alt="">
+       <span>@yield('title')</span>
+     </a>
+ 
+     <nav id="navbar" class="navbar">
+       <ul>
+         <li><a class="nav-link scrollto active" href="/">Beranda</a></li>
+         <li><a class="nav-link scrollto" href="{{url('/form-full-sekolah')}}">Informasi Sekolah</a></li>
+         <li><a class="nav-link scrollto" href="{{url('/form-full-lowongan')}}">Informasi Lowongan Kerja</a></li>
+         <li><a class="nav-link scrollto" href="#pesan">Pesan</a></li>
+       </ul>
+       <i class="bi bi-list mobile-nav-toggle"></i>
+     </nav>
+     <!-- .navbar -->
+   </div>
+ </header>
+ <!-- End Header -->
   {{-- Body --}}
   @yield('content')
   {{-- End Body --}}
@@ -182,6 +139,8 @@
     <script src="landing/js/jquery.mb.YTPlayer.min.js"></script>
     <script src="landing/js/main.js"></script>
 
+  <!-- Template Main JS File -->
+  <script src="js/main.js"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     {{-- <script src="https://unpkg.com/simpleslider-js@1.9.0/dist/simpleSlider.min.js"></script>
     <script src="https://unpkg.com/simpleslider-js@1.9.0/dist/simpleSlider.min.css"></script> --}}

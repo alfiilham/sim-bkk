@@ -591,17 +591,13 @@
                 >
               </li> -->
 
-
-
-
-
                 @endif
                 @if(auth::user()->role == 'alumni')
                 <li class="m-menu__section ">
                         <h4 class="m-menu__section-text">Alumni</h4>
                         <i class="m-menu__section-icon flaticon-more-v2"></i>
                       </li>
-              </li>
+                 </li>
 
               {{-- sub-aside alumni --}}
 
@@ -623,6 +619,23 @@
               <a href="{{url('/portofolio')}}" class="m-menu__link m-menu__toggle"
                   ><i class="m-menu__link-icon fas fa-medal"></i
                   ><span class="m-menu__link-text">Kelola Portofolio</span></a
+                >
+              </li>
+              <li class="m-menu__section ">
+                        <h4 class="m-menu__section-text">Lowongan</h4>
+                        <i class="m-menu__section-icon flaticon-more-v2"></i>
+                      </li>
+                 </li>
+              <li class="m-menu__item @yield('infolowongan')" aria-haspopup="true">
+              <a href="{{url('/infolowongan')}}" class="m-menu__link m-menu__toggle"
+                  ><i class="m-menu__link-icon la la-industry"></i
+                  ><span class="m-menu__link-text">Informasi Lowongan</span></a
+                >
+              </li>
+              <li class="m-menu__item @yield('daftarlowongan')" aria-haspopup="true">
+              <a href="{{url('/daftarLowongan')}}" class="m-menu__link m-menu__toggle"
+                  ><i class="m-menu__link-icon la la-briefcase"></i
+                  ><span class="m-menu__link-text">Sudah Daftar</span></a
                 >
               </li>
               @endif

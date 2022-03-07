@@ -30,6 +30,14 @@ Route::get('/laporan;','LaporanController@filtered')->name('laporan.filter');
 Route::get('siswa/export/','LaporanController@export')->name('export.siswa');
 Route::post('import', 'LaporanController@import')->name('import.siswa');
 
+//infolowongan-alumni
+Route::get('/infoLowongan/detail/{id}','infoLowonganController@detail');
+Route::post('/daftarInfoLowongan/{id}','infoLowonganController@daftar');
+
+//daftarlowongan-alumni
+Route::get('daftarLowongan','daftarLowonganController@index');
+Route::get('/json/daftarLowongan','daftarLowonganController@json');
+Route::delete('daftarlowongan/delete/{id}','daftarLowonganController@destroy');
 
 //alumni
 Route::resource('/inputalumni','SiswaController');

@@ -15,9 +15,10 @@ class reminder extends Mailable
      *
      * @return void
      */
-    public function __construct()
+    private $isi;
+    public function __construct($isi)
     {
-       
+       $this->isi = $isi;
     }
 
     /**
@@ -27,11 +28,14 @@ class reminder extends Mailable
      */
     public function build()
     {
-    return $this->subject('test')
+    return $this->Subject('Info Lowongan')
                 ->view('emails.reminder')
                 ->with(
                 [
-                'nama' => 'Admin BKK',
+                'nama' => 'Pelamar Tangguh',
+                'intro' => 'Melalui email ini kami ingin mengirimkan penawaran lowongan terbaru yang sesuai dengan jurusan yang Anda minati .',
+                'content' => $this->isi,
+                'closing' => 'Demikian email penawaran dari kami  Atas perhatian dari Bapak/Ibu kami ucapkan terima kasih.',
                 'website' => 'www.simbkk.com',
                 ]);
     }

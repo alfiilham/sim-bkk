@@ -22,6 +22,10 @@ class daftarLowongan extends Model
     {
         return $this->hasOne(Jurusan::class, 'id' , 'jurusan_id');
     }
+    public function Datasiswa()
+    {
+        return $this->hasOne(DataSiswa::class, 'user_id' , 'user_id');
+    }
     protected $fillable = [
     	'user_id','instansi_id','infoLowongan_id','jurusan_id','status'
     ];

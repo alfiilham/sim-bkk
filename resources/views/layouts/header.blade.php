@@ -661,6 +661,13 @@
                   ><span class="m-menu__link-text">Informasi Lowongan</span></a
                 >
               </li>
+
+              <li class="m-menu__item @yield('datapelamar')" aria-haspopup="true">
+                <a href="{{url('/daftarLowongan')}}" class="m-menu__link m-menu__toggle"
+                    ><i class="m-menu__link-icon la la-users"></i
+                    ><span class="m-menu__link-text">Data Pelamar</span></a
+                  >
+                </li>
               @endif
             </ul>
           </div>

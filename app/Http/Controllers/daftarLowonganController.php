@@ -11,6 +11,7 @@ use App\DataSiswa;
 use DataTables;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class daftarLowonganController extends Controller
 {
@@ -28,13 +29,32 @@ class daftarLowonganController extends Controller
     public function index()
     {
         $preset = preset::where('status','active')->first();
-        return view('user.daftarlowongan', compact('preset'));
+        if(Auth::user()->role == 'instansi'){
+            return view('instansi.datapelamar',compact('preset'));
+        }
+        return view('user.daftarLowongan',compact('preset'));
     }
 
     public function json()
     {
-        $model = daftarLowongan::with(['Lowongan','Instansi'])->where('jurusan_id', Auth::user()->datasiswa->jurusan_id);
+        if(Auth::user()->role == 'instansi'){
+            $model = daftarLowongan::with(['Lowongan','Instansi', 'Datasiswa'])->where('instansi_id', Auth::user()->dataInstansi->id);
+            return DataTables::eloquent($model)->make(true);
+        }
+        $model = daftarLowongan::with(['Lowongan','Instansi', 'Datasiswa'])->where('jurusan_id', Auth::user()->datasiswa->jurusan_id);
         return DataTables::eloquent($model)->make(true);
+    }
+
+    public function active($user_id)
+    {
+        daftarLowongan::where('user_id',$user_id)->update(['status' => 'Diterima']);
+        return response()->json();
+    }
+
+    public function deactive($user_id)
+    {
+        daftarLowongan::where('user_id',$user_id)->update(['status' => 'Tidak Diterima']);
+        return response()->json();
     }
 
     /**
@@ -64,9 +84,8 @@ class daftarLowonganController extends Controller
      * @param  \App\daftarLowongan  $daftarLowongan
      * @return \Illuminate\Http\Response
      */
-    public function show(daftarLowongan $daftarLowongan)
+    public function show()
     {
-        //
     }
 
     /**

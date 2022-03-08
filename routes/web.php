@@ -37,6 +37,8 @@ Route::post('/daftarInfoLowongan/{id}','infoLowonganController@daftar');
 //daftarlowongan-alumni
 Route::get('daftarLowongan','daftarLowonganController@index');
 Route::get('/json/daftarLowongan','daftarLowonganController@json');
+Route::post('/daftarlowongan/active/{id}','daftarLowonganController@active');
+Route::post('/daftarlowongan/deactive/{id}','daftarLowonganController@deactive');
 Route::delete('daftarlowongan/delete/{id}','daftarLowonganController@destroy');
 
 //alumni

@@ -166,7 +166,7 @@
 },
   {data: "id",
   instansi: "instansi.id",
-  "searchable": false,
+  "searchable": false                                                                                                                                                                                                                                                                             ,
   "sortable": false,
   render: function (id, type, full, meta, instansi) {
     return '<div class="btn-group d-flex justify-content-center"><a href="javascript:void(0)" data-toggle="tooltip" id="detail" data-id="'+id+'" data-original-title="Detail" class="btn btn-info btn-sm"><i class="fa fa-eye"></i></a><button id="daftar" class="btn btn-warning btn-sm" data-id="'+id+'"><i class="fa fa-briefcase" style="color:white;"></i></button>';

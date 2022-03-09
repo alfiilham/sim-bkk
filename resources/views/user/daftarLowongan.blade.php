@@ -67,6 +67,7 @@
     </div>
   </div>
   <!-- end -->
+
   <!--End::Section-->
   </div>
 </div>
@@ -123,7 +124,7 @@ $(document).on('click','#delete',function(){
   cancelButtonText: 'Tidak'
 }).then((result) => {
   if (result.value) {
-    var id = $(this).data("id");
+  var id = $(this).data("id");
   var token = $("meta[name='csrf-token']").attr("content");
   $.ajaxSetup({
     headers: {

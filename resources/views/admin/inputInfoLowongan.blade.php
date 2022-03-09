@@ -78,7 +78,7 @@
               @endif
               <h5><label id="date" class="form-control-label col-lg-12 mt-4">Tanggal Berakhir</label></h5>
               <div class="col-lg-12">
-                <input type="text" name="date" id="datepicker" class="form-control m-input">
+                <input type="date" name="date" id="datefield" class="form-control m-input">
               </div>
               <div class="col-lg-12 mt-4">
                 <button type="input" class="btn {{$preset->buttonClass}}">Save Data</button>
@@ -97,7 +97,6 @@
 </div>
 </div>
 <script src="https://cdn.tiny.cloud/1/6qed0blc4b73g5p5uwh7acq07ay1sli0skekw9shc6wz2sbc/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
-<script src="https://momentjs.com/downloads/moment.js"></script>
 <script>
    tinymce.init({
   selector: 'textarea',
@@ -128,11 +127,21 @@ $("#filePhoto").change(function() {
 });
 </script>
 <script>
-  $( function() {
-    $("#datepicker").datepicker({                  
-        minDate: moment().add('d', 1).toDate(),
-    });
-  } );
+  var today = new Date();
+  var dd = today.getDate() + 1;
+  var mm = today.getMonth() + 1; //January is 0!
+  var yyyy = today.getFullYear();
+
+  if (dd < 10) {
+    dd = '0' + dd;
+  }
+
+  if (mm < 10) {
+    mm = '0' + mm;
+  } 
+      
+  today = yyyy + '-' + mm + '-' + dd;
+  document.getElementById("datefield").setAttribute("min", today);
 </script>
 @include('layouts.footer')
 @endsection

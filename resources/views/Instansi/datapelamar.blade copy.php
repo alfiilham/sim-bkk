@@ -1,5 +1,5 @@
 @extends('layouts.header')
-@section('daftarLowongan','m-menu__item--active')
+@section('datapelamar','m-menu__item--active')
 @section('title','SIMBKK | Data Pelamar')
 @section('content')
 <style>

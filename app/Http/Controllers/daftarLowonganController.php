@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\statusDetail;
+use App\Siswa;
+use App\DataStatus;
 use App\daftarLowongan;
 use App\Preset;
 use App\InfoLowongan;
@@ -12,6 +15,8 @@ use DataTables;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\reminder;
 
 class daftarLowonganController extends Controller
 {
@@ -35,10 +40,15 @@ class daftarLowonganController extends Controller
         return view('user.daftarLowongan',compact('preset'));
     }
 
-    public function json()
+    public function json(Request $request)
     {
         if(Auth::user()->role == 'instansi'){
-            $model = daftarLowongan::with(['Lowongan','Instansi', 'Datasiswa'])->where('instansi_id', Auth::user()->dataInstansi->id);
+            if($request->session()->get('lowongan_id') != null){
+                $model = daftarLowongan::with(['Lowongan','Instansi', 'Datasiswa'])->where([['instansi_id', Auth::user()->dataInstansi->id],['infoLowongan_id',$request->session()->get('lowongan_id')],['status','Proses']]);
+                $request->session()->put('lowongan_id', null);
+                return DataTables::eloquent($model)->make(true);
+            }
+            $model = daftarLowongan::with(['Lowongan','Instansi', 'Datasiswa'])->where([['instansi_id', Auth::user()->dataInstansi->id]]);
             return DataTables::eloquent($model)->make(true);
         }
         $model = daftarLowongan::with(['Lowongan','Instansi', 'Datasiswa'])->where('jurusan_id', Auth::user()->datasiswa->jurusan_id);
@@ -47,7 +57,15 @@ class daftarLowonganController extends Controller
 
     public function active($user_id)
     {
+        $data = Datasiswa::where('user_id',$user_id)->first();
         daftarLowongan::where('user_id',$user_id)->update(['status' => 'Diterima']);
+        $instansi = Auth::user()->dataInstansi->nama;
+        $isi = "<strong>SELAMAT ANDA DINYATAKAN DITERIMA</strong> di perusahaan $instansi";
+        Mail::to($data->email)->send(new reminder($isi));
+        Siswa::updateOrCreate(['user_id' => $user_id],
+        [ 'status_id' => 1]);
+        statusDetail::updateOrCreate(['nis' => $data->nis],
+        ['nis' => $data->nis,'status_id' => 1,'id_instansi'=> Auth::user()->dataInstansi->id]);
         return response()->json();
     }
 
@@ -84,8 +102,15 @@ class daftarLowonganController extends Controller
      * @param  \App\daftarLowongan  $daftarLowongan
      * @return \Illuminate\Http\Response
      */
-    public function show()
+    public function show(Request $request)
     {
+        $id = $request->id;
+        $preset = preset::where('status','active')->first();
+        $request->session()->put('lowongan_id', $id);
+        if(Auth::user()->role == 'instansi'){
+            return view('instansi.datapelamar',compact('preset'));
+        }
+        return view('user.daftarLowongan',compact('preset'));
     }
 
     /**

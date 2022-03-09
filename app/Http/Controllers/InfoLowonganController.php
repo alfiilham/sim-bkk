@@ -48,11 +48,8 @@ class InfoLowonganController extends Controller
     public function json()
     {
         if(Auth::user()->role == 'instansi'){
-            $model = InfoLowongan::with('Instansi')->where('instansi',Auth::user()->dataInstansi->id);
+            $model = InfoLowongan::with(['Instansi'])->where('instansi',Auth::user()->dataInstansi->id)->select('info_lowongans.*');;
             return DataTables::eloquent($model)
-                ->addColumn('instansi', function (InfoLowongan $infolowongan) {
-                    return $infolowongan->Instansi->nama;
-                })
                 ->make(true);
         }
         elseif(Auth::user()->role == 'alumni'){
@@ -62,9 +59,6 @@ class InfoLowonganController extends Controller
         }
             $model = InfoLowongan::with('Instansi');
             return DataTables::eloquent($model)
-                ->addColumn('instansi', function (InfoLowongan $infolowongan) {
-                    return $infolowongan->Instansi->nama;
-                })
                 ->make(true);
     }
 
@@ -111,6 +105,7 @@ class InfoLowonganController extends Controller
                 'judul' => $request->judul,
                 'isi' => $request->isi,
                 'foto' => $nama_file,
+                'tenggat' => $request->date,
                 'status' => 'Aktif'
             ]);
         }
@@ -121,6 +116,7 @@ class InfoLowonganController extends Controller
                 'judul' => $request->judul,
                 'isi' => $request->isi,
                 'foto' => $nama_file,
+                'tenggat' => $request->date,
                 'status' => 'Aktif'
             ]);
         }
@@ -187,6 +183,7 @@ class InfoLowonganController extends Controller
         $lowongan = InfoLowongan::find($id);
         $lowongan->judul = $request->judul;
         $lowongan->isi = $request->isi;
+        $lowongan->tenggat = $request->date;
         $lowongan->jurusan = $request->jurusan;
         if ($request->hasFile('foto')) {
             $gambar = InfoLowongan::where('id',$id)->first();

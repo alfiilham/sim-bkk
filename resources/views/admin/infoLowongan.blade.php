@@ -33,7 +33,6 @@
       <div class="col-xl-12 mb-4">
         <a href="/inputinfolowongan"><div class="btn {{$preset->buttonClass}}" >Masukkan Info Lowongan</div></a>
       </div>
-
       <div class="col-xl-12">
         <div class="m-portlet m-portlet--mobile ">
           <div class="m-portlet__head">
@@ -53,12 +52,12 @@
                 <tr>
                   <th style="width:10px">No</th>
                   <th>Judul</th>
-                  <th style="width:100px">Isi</th>
-                  <th style="width:100px">Foto</th>
-                  <th style="width:100px">Jurusan</th>
-                  <th style="width:100px">Instansi</th>
-                  <th style="width:100px">Status</th>
-                  <th style="width:140px">Action</th>
+                  <th>Isi</th>
+                  <th>Foto</th>
+                  <th>Jurusan</th>
+                  <th>Instansi</th>
+                  <th>Status</th>
+                  <th class="text-center" style="width:200px">Action</th>
                 </tr>
               </thead>
               <tbody>
@@ -113,7 +112,7 @@
     return '<div class="jurusan">'+id+'</div>';
   },
 },
-  {data:"instansi",
+  {data:"instansi.nama",
   "searchable": false,
   "sortable": false,
   render: function (id, type, full, meta) {
@@ -125,7 +124,7 @@
   "searchable": false,
   "sortable": false,
   render: function (id, type, full, meta) {
-    return '<div class="btn-group"><a href="javascript:void(0)" data-toggle="tooltip" id="active"  data-id="'+id+'" class="btn btn-success btn-sm"><i class="fa fa-check" style="color:white;"></i></a><a href="javascript:void(0)" data-toggle="tooltip" id="deactive"  data-id="'+id+'" class="btn btn-danger btn-sm"><i class="fa fa-times" style="color:white;"></i></a>&nbsp&nbsp</div><div class="btn-group"><a href="/editinfolowongan;'+id+'" data-toggle="tooltip" id="edit"  data-id="'+id+'" class="btn btn-warning btn-sm"><i class="fa fa-edit" style="color:white;"></i></a>  <a href="javascript:void(0)" data-toggle="tooltip" id="delete"  data-id="'+id+'" data-original-title="Delete" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></a></div>';
+    return '<div class="btn-group"><a href="javascript:void(0)" data-toggle="tooltip" id="active"  data-id="'+id+'" class="btn btn-success btn-sm"><i class="fa fa-check" style="color:white;"></i></a><a href="javascript:void(0)" data-toggle="tooltip" id="deactive"  data-id="'+id+'" class="btn btn-danger btn-sm"><i class="fa fa-times" style="color:white;"></i></a>&nbsp&nbsp</div><div class="btn-group"><a href="/editinfolowongan;'+id+'" data-toggle="tooltip" id="edit"  data-id="'+id+'" class="btn btn-warning btn-sm"><i class="fa fa-edit" style="color:white;"></i></a>  <a href="javascript:void(0)" data-toggle="tooltip" id="delete"  data-id="'+id+'" data-original-title="Delete" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></a>&nbsp&nbsp <form action="/daftarLowongan" method="post">@csrf<input type="hidden" name="id" value="'+id+'"><button class="btn btn-info btn-sm"><i class="fa fa-info-circle" style="color:white;"></i></button></form></div>';
   },
 },
 ],

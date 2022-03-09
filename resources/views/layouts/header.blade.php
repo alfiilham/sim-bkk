@@ -655,6 +655,12 @@
                 >
               </li>
 
+              <li class="m-menu__section ">
+                        <h4 class="m-menu__section-text">Lowongan</h4>
+                        <i class="m-menu__section-icon flaticon-more-v2"></i>
+                      </li>
+                 </li>
+
               <li class="m-menu__item @yield('infolowongan')" aria-haspopup="true">
               <a href="{{url('/infolowongan')}}" class="m-menu__link m-menu__toggle"
                   ><i class="m-menu__link-icon la la-industry"></i
@@ -662,10 +668,10 @@
                 >
               </li>
 
-              <li class="m-menu__item @yield('datapelamar')" aria-haspopup="true">
+              <li class="m-menu__item @yield('/daftarLowongan')" aria-haspopup="true">
                 <a href="{{url('/daftarLowongan')}}" class="m-menu__link m-menu__toggle"
                     ><i class="m-menu__link-icon la la-users"></i
-                    ><span class="m-menu__link-text">Data Pelamar</span></a
+                    ><span class="m-menu__link-text">Pelamar Diterima</span></a
                   >
                 </li>
               @endif

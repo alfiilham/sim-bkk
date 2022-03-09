@@ -15,6 +15,6 @@ class InfoLowongan extends Model
         return $this->hasMany(Jurusan::class, 'id' , 'jurusan');
     }
     protected $fillable = [
-    	'judul','isi','foto','active','jurusan','instansi'
+    	'judul','isi','foto','active','jurusan','instansi','tenggat'
     ];
 }

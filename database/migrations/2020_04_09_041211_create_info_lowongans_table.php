@@ -20,6 +20,7 @@ class CreateInfoLowongansTable extends Migration
             $table->longText('judul');
             $table->longText('isi');
             $table->longText('foto');
+            $table->date('tenggat');
             $table->enum('status', ['Aktif', 'Tidak Aktif']);
             $table->timestamps();
         });

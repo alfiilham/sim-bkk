@@ -33,9 +33,9 @@ class reminder extends Mailable
                 ->with(
                 [
                 'nama' => 'Pelamar Tangguh',
-                'intro' => 'Melalui email ini kami ingin mengirimkan penawaran lowongan terbaru yang sesuai dengan jurusan yang Anda minati .',
+                'intro' => 'Melalui email ini kami ingin menginfokan .',
                 'content' => $this->isi,
-                'closing' => 'Demikian email penawaran dari kami  Atas perhatian dari Bapak/Ibu kami ucapkan terima kasih.',
+                'closing' => 'Demikian email dari kami  Atas perhatian dari Bapak/Ibu kami ucapkan terima kasih.',
                 'website' => 'www.simbkk.com',
                 ]);
     }

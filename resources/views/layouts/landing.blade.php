@@ -25,7 +25,7 @@
   <link rel="stylesheet" href="landing/css/owl.carousel.min.css">
   <link rel="stylesheet" href="landing/css/owl.theme.default.min.css">
   <link rel="stylesheet" href="landing/css/owl.theme.default.min.css">
-
+  <link rel="stylesheet" href="fontawesome/css/all.css">
   <link rel="stylesheet" href="landing/css/jquery.fancybox.min.css">
 
   <link rel="stylesheet" href="landing/css/bootstrap-datepicker.css">
@@ -73,47 +73,58 @@
   <footer class="footer">
       <div class="container">
           <div class="row">
-              <div class="col-md-5">
-                  <h4>Bursa Kerja Khusus</h4>
-                  <h5>SMK WIKRAMA BOGOR</h5>
-                  <div class="row">
-                      <div class="col-md-12">
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa quae animi, laboriosam voluptatibus neque ipsum quidem quas eius assumenda quam magnam, eos dolorem architecto sequi esse omnis veniam tenetur ad!</p>
-                      </div>
+            <div class="col-md-3">
+              <a href="https://smkwikrama.sch.id/" class="logo" style="text-decoration:none">
+                <img src="image/config/logo/wk.png" alt="">
+              </a>
+              <br>
+              <div class="row">
+                  <div class="col-md-10">
+                    <p>Jl. Raya Wangun Kelurahan Sindangsari
+                    <br> Bogor Timur 16720</p>
                   </div>
-                  <ul class="nav">
-                      <li class="nav-item"><a href="" class="nav-link pl-0"><i class="fa fa-facebook fa-lg"></i></a></li>
-                      <li class="nav-item"><a href="" class="nav-link"><i class="fa fa-twitter fa-lg"></i></a></li>
-                      <li class="nav-item"><a href="" class="nav-link"><i class="fa fa-github fa-lg"></i></a></li>
-                      <li class="nav-item"><a href="" class="nav-link"><i class="fa fa-instagram fa-lg"></i></a></li>
-                  </ul>
+              </div>
+              <ul class="nav">
+                  <li class="nav-item"><a href="https://www.facebook.com/smkwikrama/" class="nav-link pl-0"><i class="fa-brands fa-facebook fa-2xl"></i></a></li>
+                  <li class="nav-item"><a href="https://twitter.com/smkwikrama" class="nav-link"><i class="fa-brands fa-twitter fa-2xl"></i></a></li>
+                  <li class="nav-item"><a href="https://www.youtube.com/channel/UCyhEUzlXbXet57qFnDfdWuw" class="nav-link"><i class="fa-brands fa-youtube fa-2xl"></i></a></li>
+                  <li class="nav-item"><a href="https://www.instagram.com/smkwikrama/" class="nav-link"><i class="fa-brands fa-instagram fa-2xl"></i></a></li>
+              </ul>
+              <br>
+            </div>
+              <div class="col-md-5">
+                <h4>Bursa Kerja Khusus</h4>
+                <h5>SMK WIKRAMA BOGOR</h5>
+                <div class="row">
+                    <div class="col-md-12">
+                      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa quae animi, laboriosam voluptatibus neque ipsum quidem quas eius assumenda quam magnam, eos dolorem architecto sequi esse omnis veniam tenetur ad!</p>
+                    </div>
+                </div>
                   <br>
               </div>
-              @guest
-              
-              @else
-              <div class="col-md-2">
-                  <h5 class="text-md-right">Kirim Pesan</h5>
-                  <hr>
-              </div>
-              <div class="col-md-5">
-                  <form id="formpesan">
-                      <fieldset class="form-group">
-                          <textarea class="form-control" name="pesan" id="pesan" rows="4" placeholder="Pesan"></textarea>
-                      </fieldset>
-                      <fieldset class="form-group text-xs-right">
-                          <button type="button" id="send" class="btn btn-secondary-outline btn-lg">Send</button>
-                      </fieldset>
-                  </form>
-              @endguest
+              <div class="col-md-4">
+                <h5>Kirim Pesan</h5>
+                  <div class="row">
+                    <div class="col-md-12">
+                      <form id="formpesan">
+                        <fieldset class="form-group">
+                            <textarea class="form-control" name="pesan" id="pesan" rows="4" placeholder="Pesan"></textarea>
+                        </fieldset>
+                        <fieldset class="form-group text-xs-right">
+                         <center> <button type="button" id="send" class="btn btn-secondary-outline btn-lg">Send</button></center> 
+                        </fieldset>
+                      </form>
+                    </div>
+                  </div>
+                  <br>
               </div>
           </div>
-      </div>
-      <p class="mt-2">
-          <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-          Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="icon-heart text-danger" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank" >Colorlib</a>
-          <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-          </p>
+        </div>
+        <p class="mt-2" style="text-align: center;">
+            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+            Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="icon-heart text-danger" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank" >Colorlib</a>
+            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+        </p>
   </footer>
 
   

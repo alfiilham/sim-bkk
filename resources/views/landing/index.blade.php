@@ -121,15 +121,15 @@
                               </div>
                                 <div class="col-md-12">
                                   @forelse($lowongan as $data)
-                                  <div class="post-entry-2 d-flex">
-                                    <div class="thumbnail zoom" style="border-radius:10px;background-image: url('image/InfoLowongan/{{$data->foto}}')"></div>
-                                    <div class="contents">
-                                      <h2><a href="/form-single-lowongan;{{$data->id}}">{{$data->judul}}</a></h2>
-                                      <div class="post-meta">
-                                       <p class="isi"> {!!$data->isi!!}</p>
-                                        <span class="date-read">{{substr($data->updated_at,0,10)}}<span class="mx-1">&bullet;</span></span>
-                                      </div>
+                                  <div class="card" style="width: 19rem;">
+                                    <img class="card-img-top" src='image/InfoLowongan/{{$data->foto}}' alt="Card image cap">
+                                    <div class="card-body">
+                                      <h5 class="card-title"><a href="/form-single-lowongan;{{$data->id}}">{{$data->judul}}</a></h5>
+                                      <p class="isi"> {!!$data->isi!!}</p>
                                     </div>
+                                    <ul class="list-group list-group-flush">
+                                      <li class="list-group-item">{{substr($data->updated_at,0,10)}}</li>
+                                    </ul>
                                   </div>
                                   @empty
     
@@ -164,16 +164,16 @@
                           </div>
                             <div class="col-md-12">
                               @forelse($sekolah as $data)
-                              <div class="post-entry-2 d-flex">
-                                <div class="thumbnail zoom" style="border-radius:10px;background-image: url('image/InfoSekolah/{{$data->foto}}')"></div>
-                                <div class="contents">
-                                  <h2><a href="/form-single-sekolah;{{$data->id}}">{{$data->judul}}</a></h2>
-                                  <div class="post-meta">
-                                   <p class="isi">{{$data->isi}}</p>
-                                    <span class="date-read">{{substr($data->updated_at,0,10)}}<span class="mx-1">&bullet;</span></span>
+                              <div class="card" style="width: 19rem;">
+                                    <img class="card-img-top" src='image/InfoSekolah/{{$data->foto}}' alt="Card image cap">
+                                    <div class="card-body">
+                                      <h5 class="card-title"><a href="/form-single-sekolah;{{$data->id}}">{{$data->judul}}</a></h5>
+                                      <p class="isi"> {!!$data->isi!!}</p>
+                                    </div>
+                                    <ul class="list-group list-group-flush">
+                                      <li class="list-group-item">{{substr($data->updated_at,0,10)}}</li>
+                                    </ul>
                                   </div>
-                                </div>
-                              </div>
                               @empty
     
                               <center><i class="far fa-sad-tear"></i><h1>Belum ada Info Lowongan</h1></center>

@@ -1,7 +1,6 @@
 <div>
 <h2>Halo, {{ $nama }} !</h2>
 <p> {{ $intro }}</p>
-<p> Segera penuhi persyaratan dibawah ini : </p>
 <ol>{!! $content !!}</ol>
 <br>
 <p>{{ $closing }}</p>

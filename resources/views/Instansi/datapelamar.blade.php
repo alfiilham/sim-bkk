@@ -1,5 +1,5 @@
 @extends('layouts.header')
-@section('daftarLowongan','m-menu__item--active')
+@section($active,'m-menu__item--active')
 @section('title','SIMBKK | Data Pelamar')
 @section('content')
 <style>
@@ -79,13 +79,13 @@ var table = $('#table').DataTable({
     "order": [[ 1, 'asc' ]],
     columns: 
     [
-      { "data": null,"sortable": false, 
+      { "data": null,"sortable": false, "searchable": false,
       render: function (data, type, row, meta) {
         return meta.row + meta.settings._iDisplayStart + 1;
       }  
       },
       {data: "datasiswa.name",
-      "searchable": false,
+      "searchable": true,
       "sortable": false,
       render: function (id,type, full, meta) {
         return '<div class="user">'+id+'</div>';

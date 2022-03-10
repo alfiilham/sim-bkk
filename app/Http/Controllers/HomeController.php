@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use App\Message;
+use App\infoLowongan;
+use App\daftarLowongan;
 use App\Siswa;
 use App\datastatus;
 use App\Jurusan;
@@ -76,7 +79,9 @@ class HomeController extends Controller
         $status = Status::all();
         $company = Instansi::orderby('nama','asc')->where('nama','!=',null)->get();
         $rayon = Rayon::orderby('rayon','asc')->get();
+        $message = null;
         if(auth::user()->role == 'alumni'){
+            $message = Message::select('isi')->where('user_id', auth::user()->data->user_id)->get();
             switch (auth::user()->data->status_id) {
                 case 1:
                     $formNon = ['Nama Instansi','Divisi','Durasi Kontrak Kerja','Pendapatan Bulanan','Alamat Instansi'];
@@ -94,10 +99,13 @@ class HomeController extends Controller
             }
         }elseif(auth::user()->role == 'instansi'){
             $preset = preset::where('status','active')->first();
+            $jmlhlowongan = count(infolowongan::where('instansi',auth::user()->dataInstansi->id)->get());
+            $jmlhpelamar = count(daftarLowongan::where('instansi_id',auth::user()->dataInstansi->id)->get());
+            $jmlhpelamarditerima = count(daftarLowongan::where([['instansi_id',auth::user()->dataInstansi->id],['status','Diterima']])->get());
             if(auth::user()->email == null){
-                return view('instansi.editdata',compact('preset'));
+                return view('instansi.editdata',compact('preset','jmlhlowongan','jmlhpelamar','jmlhpelamarditerima'));
             }
-            return view('dashboard',compact('preset'));
+            return view('dashboard',compact('preset','jmlhlowongan','jmlhpelamar','jmlhpelamarditerima'));
         }else{
             $formNon = 'admin';
         }
@@ -107,7 +115,7 @@ class HomeController extends Controller
         if(auth::user()->email == null){
             return view('user.editstatus',compact('jejakAlumni','preset','company','formNon','rayon','jejakJurusan','jurusan','siswa','kerja','kuliah','wirausaha','belumInput','status'));
         }
-        return view('dashboard',compact('jejakAlumni','preset','company','formNon','rayon','jejakJurusan','jurusan','siswa','kerja','kuliah','wirausaha','belumInput','status'));
+        return view('dashboard',compact('jejakAlumni','preset','company','formNon','rayon','jejakJurusan','jurusan','siswa','kerja','kuliah','wirausaha','belumInput','status','message'));
     }
 
     public function updateProfile(request $request){

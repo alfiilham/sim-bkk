@@ -32,6 +32,9 @@ class InfoLowonganController extends Controller
 
     public function index()
     {
+        if(auth::user()->email == null){
+            return redirect('home');
+        }
         $preset = preset::where('status','active')->first();
         if(Auth::user()->role == 'alumni'){
             return view('user.infoLowongan',compact('preset'));
@@ -48,7 +51,7 @@ class InfoLowonganController extends Controller
     public function json()
     {
         if(Auth::user()->role == 'instansi'){
-            $model = InfoLowongan::with(['Instansi'])->where('instansi',Auth::user()->dataInstansi->id)->select('info_lowongans.*');;
+            $model = InfoLowongan::with(['Instansi'])->where('instansi',Auth::user()->dataInstansi->id);
             return DataTables::eloquent($model)
                 ->make(true);
         }

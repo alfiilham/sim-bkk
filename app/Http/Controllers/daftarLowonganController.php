@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\statusDetail;
+use App\Message;
 use App\Siswa;
 use App\DataStatus;
 use App\daftarLowongan;
@@ -34,10 +35,11 @@ class daftarLowonganController extends Controller
     public function index()
     {
         $preset = preset::where('status','active')->first();
+        $active = "dataPelamar";
         if(Auth::user()->role == 'instansi'){
-            return view('instansi.datapelamar',compact('preset'));
+            return view('instansi.datapelamar',compact('preset','active'));
         }
-        return view('user.daftarLowongan',compact('preset'));
+        return view('user.daftarLowongan',compact('preset','active'));
     }
 
     public function json(Request $request)
@@ -48,10 +50,14 @@ class daftarLowonganController extends Controller
                 $request->session()->put('lowongan_id', null);
                 return DataTables::eloquent($model)->make(true);
             }
-            $model = daftarLowongan::with(['Lowongan','Instansi', 'Datasiswa'])->where([['instansi_id', Auth::user()->dataInstansi->id]]);
+            $model = daftarLowongan::with(['Lowongan','Instansi', 'Datasiswa'])->where([['instansi_id', Auth::user()->dataInstansi->id],['status','Diterima']]);
             return DataTables::eloquent($model)->make(true);
         }
-        $model = daftarLowongan::with(['Lowongan','Instansi', 'Datasiswa'])->where('jurusan_id', Auth::user()->datasiswa->jurusan_id);
+        elseif(Auth::user()->role == 'alumni'){
+            $model = daftarLowongan::with(['Lowongan','Instansi', 'Datasiswa'])->where('jurusan_id', Auth::user()->datasiswa->jurusan_id);
+            return DataTables::eloquent($model)->make(true);
+        }
+        $model = daftarLowongan::with(['Lowongan','Instansi', 'Datasiswa'])->where('infoLowongan_id',$request->session()->get('lowongan_id'));
         return DataTables::eloquent($model)->make(true);
     }
 
@@ -66,6 +72,10 @@ class daftarLowonganController extends Controller
         [ 'status_id' => 1]);
         statusDetail::updateOrCreate(['nis' => $data->nis],
         ['nis' => $data->nis,'status_id' => 1,'id_instansi'=> Auth::user()->dataInstansi->id]);
+        Message::Create([
+            'user_id' => $user_id,
+            'isi' => "<strong>Selamat</strong> ananda diterima di perusahaan " .Auth::user()->dataInstansi->nama. " silahkan lengkapi data Pekerjaan anda"
+        ]);
         return response()->json();
     }
 
@@ -108,9 +118,11 @@ class daftarLowonganController extends Controller
         $preset = preset::where('status','active')->first();
         $request->session()->put('lowongan_id', $id);
         if(Auth::user()->role == 'instansi'){
-            return view('instansi.datapelamar',compact('preset'));
+            $active = "showpelamar";
+            return view('instansi.datapelamar',compact('preset','active'));
         }
-        return view('user.daftarLowongan',compact('preset'));
+        $active = "showpelamar";
+        return view('instansi.datapelamar',compact('preset','active'));
     }
 
     /**

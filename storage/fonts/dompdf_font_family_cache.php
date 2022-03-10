@@ -81,11 +81,11 @@
     'normal' => $fontDir . '/nunito-normal_176125b1b6dc4704cbf0390040859779',
   ),
   'lato' => array(
-    '300' => $fontDir . '/lato-300_e2505967534cb456179828cedbe42a06',
-    'normal' => $fontDir . '/lato-normal_f1d1f181811cdb0aeadaacc9bb6b2891',
+    '300' => $fontDir . '/lato-300_b0807c249b32f503315a3fa73ea557b1',
+    'normal' => $fontDir . '/lato-normal_5d34cc3fd0f97156a9be1e892753ce31',
   ),
   'rokkitt' => array(
-    'normal' => $fontDir . '/rokkitt-normal_598dd502206fdaf5ee4166ba51aed605',
-    'bold' => $fontDir . '/rokkitt-bold_0b9e38e708f924835626e1ddac9d3ec4',
+    'normal' => $fontDir . '/rokkitt-normal_d6d9d13c8dfa6b51dfa698761a546b6e',
+    'bold' => $fontDir . '/rokkitt-bold_25522cd7419fba4997df299549389c31',
   ),
 ) ?>

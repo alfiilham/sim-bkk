@@ -2,6 +2,14 @@
     <br>
     <h3>Selamat Datang {{auth::user()->name}}</h3>
     <br>
+    @if(!empty($message))
+    <div class="alert alert-primary alert-dismissible fade show" role="alert">
+        {!! $message[0]->isi !!}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    @endif
     <div class="row">
         <div class="col-md-4">
             <div class="card border-success mb-3">

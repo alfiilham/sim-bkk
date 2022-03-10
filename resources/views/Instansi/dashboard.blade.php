@@ -5,6 +5,42 @@
     <div class="row">
         <div class="col-md-4">
             <div class="card border-success mb-3">
+                <div class="card-header bg-transparent border-success">Jumlah lowongan</div>
+                <div class="card-body text-success">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h1 class="card-text">{{$jmlhlowongan}}</h1>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card border-success mb-3">
+                <div class="card-header bg-transparent border-success">Jumlah Pelamar</div>
+                <div class="card-body text-success">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h1 class="card-text">{{$jmlhpelamar}}</h1>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card border-success mb-3">
+                <div class="card-header bg-transparent border-success">Jumlah Pelamar Diterima</div>
+                <div class="card-body text-success">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h1 class="card-text">{{$jmlhpelamarditerima}}</h1>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card border-success mb-3">
                 <div class="card-header bg-transparent border-success">Data Instansi</div>
                 <div class="card-body text-success">
                     <div class="row">
@@ -31,8 +67,7 @@
                     </div>
                 </div>
                 <div class="card-footer bg-transparent border-success">Footer</div>
-                </div>
             </div>
-        </div>  
+        </div> 
     </div>
 </div>

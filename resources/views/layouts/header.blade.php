@@ -668,7 +668,7 @@
                 >
               </li>
 
-              <li class="m-menu__item @yield('/daftarLowongan')" aria-haspopup="true">
+              <li class="m-menu__item @yield('dataPelamar')" aria-haspopup="true">
                 <a href="{{url('/daftarLowongan')}}" class="m-menu__link m-menu__toggle"
                     ><i class="m-menu__link-icon la la-users"></i
                     ><span class="m-menu__link-text">Pelamar Diterima</span></a

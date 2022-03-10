@@ -2,7 +2,7 @@
     <br>
     <h3>Selamat Datang {{auth::user()->name}}</h3>
     <br>
-    @if(!empty($message))
+    @if(!$message->isEmpty()))
     <div class="alert alert-primary alert-dismissible fade show" role="alert">
         {!! $message[0]->isi !!}
         <button type="button" class="close" data-dismiss="alert" aria-label="Close">

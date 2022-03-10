@@ -67,7 +67,9 @@ class daftarLowonganController extends Controller
         daftarLowongan::where('user_id',$user_id)->update(['status' => 'Diterima']);
         $instansi = Auth::user()->dataInstansi->nama;
         $isi = "<strong>SELAMAT ANDA DINYATAKAN DITERIMA</strong> di perusahaan $instansi";
-        Mail::to($data->email)->send(new reminder($isi));
+        if($data->email_verified_at != null){
+            Mail::to($data->email)->send(new reminder($isi));
+        }
         Siswa::updateOrCreate(['user_id' => $user_id],
         [ 'status_id' => 1]);
         statusDetail::updateOrCreate(['nis' => $data->nis],

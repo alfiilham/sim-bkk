@@ -16,6 +16,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\reminder;
+use Carbon\Carbon;
 
 class InfoLowonganController extends Controller
 {
@@ -56,7 +57,8 @@ class InfoLowonganController extends Controller
                 ->make(true);
         }
         elseif(Auth::user()->role == 'alumni'){
-            $model = InfoLowongan::with('Instansi')->where('jurusan', 'like', '%'.Auth::user()->datasiswa->short.'%');
+            $dt = Carbon::now();
+            $model = InfoLowongan::with('Instansi')->where([['jurusan', 'like', '%'.Auth::user()->datasiswa->short.'%'],['tenggat','>',$dt->toDateString()]]);
             return DataTables::eloquent($model)
                 ->make(true);
         }
@@ -93,6 +95,14 @@ class InfoLowonganController extends Controller
      */
     public function store(Request $request)
     {
+        $ValidatedData = $request->validate([
+            'jurusan' =>'required',
+            'judul' => 'required',
+            'isi' => 'required',
+            'foto' => 'required',
+            'date' => 'required',
+        ]);
+
         $request->merge([ 
             'jurusan' => implode(',', (array) $request->get('jurusan'))
         ]);
@@ -111,6 +121,7 @@ class InfoLowonganController extends Controller
                 'tenggat' => $request->date,
                 'status' => 'Aktif'
             ]);
+            $instansi=Auth::user()->dataInstansi->nama;
         }
         else{
             InfoLowongan::create([
@@ -122,6 +133,8 @@ class InfoLowonganController extends Controller
                 'tenggat' => $request->date,
                 'status' => 'Aktif'
             ]);
+            $datainstansi = Instansi::select('nama')->where('id',$request->instansi)->get();
+            $instansi = $datainstansi[0]->nama;
         }
         $jurusan = explode(',',$request->jurusan);
         $hasil[0] = 0;
@@ -133,10 +146,11 @@ class InfoLowonganController extends Controller
                     $hasil[$a] = $email[$a][$b]->email;
                 }
             }
-            $isi = $request->isi;
             if($hasil[0] != null){
+                $isi = $request->isi;
+                $type = "info lowongan";
                 for ($s=0; $s < count($hasil) ; $s++) { 
-                    Mail::to($hasil[$s])->send(new reminder($isi));
+                    Mail::to($hasil[$s])->send(new reminder($isi,$instansi,$type));
                 }
             }
         return redirect('/infolowongan');
@@ -180,6 +194,15 @@ class InfoLowonganController extends Controller
      */
     public function update($id, Request $request)
     {
+
+
+        $ValidatedData = $request->validate([
+            'jurusan' =>'required',
+            'judul' => 'required',
+            'isi' => 'required',
+            'date' => 'required',
+        ]);
+
         $request->merge([ 
             'jurusan' => implode(',', (array) $request->get('jurusan'))
         ]);

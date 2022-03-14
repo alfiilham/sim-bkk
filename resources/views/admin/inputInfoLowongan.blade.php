@@ -14,13 +14,21 @@
   </div>
   <!-- Begin Body -->
   <!--Begin::Section-->
-
   <div class="container">
+    @if ($errors->any())
+          @foreach ($errors->all() as $error)
+              <div class="alert alert-danger alert-dismissible fade show" role="alert">
+              {{$error}}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+          @endforeach
+      @endif
     <div class="row">
-    <div class="col-xl-12 mb-4">
+      <div class="col-xl-12 mb-4">
         <a href="/infolowongan"><div class="btn {{$preset->buttonClass}}" >Kembali</div></a>
       </div>
-
       <div class="col-xl-12">
         <div class="m-portlet m-portlet--mobile ">
           <div class="m-portlet__head">
@@ -40,12 +48,12 @@
               <input type="hidden" name="id" id="id" class="form-control m-input">
               <h5><label id="isi" class="form-control-label col-lg-3 mt-4">Judul</label></h5>
               <div class="col-lg-12">
-                <input type="text" name="judul" required id="judul" class="form-control m-input">
+                <input type="text" name="judul" id="judul" class="form-control m-input" value="{{ old('judul')}}" required>
               </div>
 
               <h5><label id="isi" class="form-control-label col-lg-3 mt-4">Isi</label></h5>
               <div class="col-lg-12">
-                <textarea name="isi" id="isi" class="form-control" cols="30" rows="10"></textarea>
+                <textarea name="isi" id="isi" class="form-control" cols="30" rows="10" required> {{old('isi') }}</textarea>
               </div>
 
               <h5><label id="foto" class="form-control-label col-lg-3 mt-4">Foto</label></h5>
@@ -53,7 +61,7 @@
                 <img id="previewHolder" alt=" Preview" width="150px" height="150px"/>
               </div>
               <div class="col-lg-12">
-                <input type="file" name="foto" id="filePhoto" class="form-control m-input">
+                <input type="file" name="foto" id="filePhoto" class="form-control m-input" value="{{ old('foto')}}" required>
               </div>
               <h5><label id="jurusan" class="form-control-label col-lg-12 mt-4">For Jurusan</label></h5>
               <div class="col-lg-12">
@@ -69,16 +77,17 @@
               @if(Auth::user()->role == "admin")
                 <h5><label id="instansi" class="form-control-label col-lg-12 mt-4">Instansi</label></h5>
               <div class="col-lg-12">
-                <select class="form-control" aria-label="Default select example" name="instansi">
+                <select class="form-control" aria-label="Default select example" name="instansi" value="{{ old('instansi')}}" required>
+                <option disabled selected style="display: none">----Pilih Instansi-----</option>
                   @foreach($instansis as $instansi)
-                    <option value="{{$instansi->id}}">{{$instansi->nama}}</option>
+                    <option value="{{$instansi->id }}" {{ ( old('instansi',) == $instansi->id ? "selected":"")}}>{{$instansi->nama}}</option>
                   @endforeach
                 </select>
               </div>
               @endif
               <h5><label id="date" class="form-control-label col-lg-12 mt-4">Tanggal Berakhir</label></h5>
               <div class="col-lg-12">
-                <input type="date" name="date" id="datefield" class="form-control m-input">
+                <input type="date" name="date" id="datefield" class="form-control m-input" value="{{ old('date')}}" required>
               </div>
               <div class="col-lg-12 mt-4">
                 <button type="input" class="btn {{$preset->buttonClass}}">Save Data</button>

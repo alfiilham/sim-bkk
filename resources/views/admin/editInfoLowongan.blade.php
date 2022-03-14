@@ -40,12 +40,12 @@
               <input type="hidden" name="id" id="id" class="form-control m-input">
               <h5><label id="isi" class="form-control-label col-lg-3 mt-4">Judul</label></h5>
               <div class="col-lg-12">
-                <input type="text" name="judul" required id="judul" value="{{$d->judul}}" class="form-control m-input">
+                <input type="text" name="judul" required id="judul" value="{{ old('judul',$d->judul)}}" class="form-control m-input">
               </div>
 
               <h5><label id="isi" class="form-control-label col-lg-3 mt-4">Isi</label></h5>
               <div class="col-lg-12">
-                <textarea name="isi" id="isi" required class="form-control" cols="30" rows="10">{{$d->isi}}</textarea>
+                <textarea name="isi" id="isi" required class="form-control" cols="30" rows="10">{{old('isi', $d->isi)}}</textarea>
               </div>
 
               <h5><label id="foto" class="form-control-label col-lg-3 mt-4">Foto</label></h5>
@@ -80,7 +80,7 @@
               @endif
               <h5><label id="date" class="form-control-label col-lg-12 mt-4">Tanggal Berakhir</label></h5>
               <div class="col-lg-12">
-                <input type="date" name="date" id="datefield" class="form-control m-input" value="{{$d->tenggat}}">
+                <input type="date" name="date" id="datefield" class="form-control m-input" value="{{old('date',$d->tenggat)}}">
               </div>
               <div class="col-lg-12 mt-4">
                 <button type="input" class="btn {{$preset->buttonClass}}">Save Data</button>

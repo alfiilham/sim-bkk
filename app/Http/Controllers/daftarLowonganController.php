@@ -64,19 +64,27 @@ class daftarLowonganController extends Controller
     public function active($user_id)
     {
         $data = Datasiswa::where('user_id',$user_id)->first();
+
+        //update status
         daftarLowongan::where('user_id',$user_id)->update(['status' => 'Diterima']);
-        $instansi = Auth::user()->dataInstansi->nama;
-        $isi = "<strong>SELAMAT ANDA DINYATAKAN DITERIMA</strong> di perusahaan $instansi";
+
+        //kirim email
         if($data->email_verified_at != null){
-            Mail::to($data->email)->send(new reminder($isi));
+            $instansi = Auth::user()->dataInstansi->nama;
+            $isi = "<strong>SELAMAT ANDA DINYATAKAN DITERIMA</strong> di perusahaan $instansi";
+            $type = "lowongan diterima";
+            Mail::to($data->email)->send(new reminder($isi,$instansi,$type));
         }
+
+        //update data siswa
         Siswa::updateOrCreate(['user_id' => $user_id],
         [ 'status_id' => 1]);
         statusDetail::updateOrCreate(['nis' => $data->nis],
         ['nis' => $data->nis,'status_id' => 1,'id_instansi'=> Auth::user()->dataInstansi->id]);
         Message::Create([
             'user_id' => $user_id,
-            'isi' => "<strong>Selamat</strong> ananda diterima di perusahaan " .Auth::user()->dataInstansi->nama. " silahkan lengkapi data Pekerjaan anda"
+            'isi' => "<strong>Selamat</strong> ananda diterima di perusahaan " .Auth::user()->dataInstansi->nama. " silahkan lengkapi data Pekerjaan anda",
+            'status' => 'Belom Dilihat'
         ]);
         return response()->json();
     }

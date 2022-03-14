@@ -17,6 +17,7 @@ class CreateMessagesTable extends Migration
             $table->bigIncrements('id');
             $table->bigInteger('user_id');
             $table->text('isi');
+            $table->enum('status', ['Sudah Dilihat', 'Belom Dilihat']);
             $table->timestamps();
         });
     }

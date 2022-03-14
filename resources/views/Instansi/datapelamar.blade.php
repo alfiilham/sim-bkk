@@ -142,6 +142,15 @@ $(document).on('click','#active',function(){
         url: "/daftarlowongan/active/"+id,
         type: "POST",
         dataType: 'json',
+        beforeSend: function() {
+          swal.fire({
+            html: '<h5>Loading...</h5>',
+            showConfirmButton: false,
+          });
+          Swal.showLoading({
+            showConfirmButton: false,
+          })
+            },
         success: function (data) {
           table.draw();
           swal({

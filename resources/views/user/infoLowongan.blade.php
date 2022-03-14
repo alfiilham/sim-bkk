@@ -48,12 +48,13 @@
               <thead>
                 <tr>
                   <th style="width:10px">No</th>
-                  <th style="width:50px">Judul</th>
-                  <th style="width:100px">Isi</th>
-                  <th style="width:100px">Foto</th>
-                  <th style="width:100px">Jurusan</th>
-                  <th style="width:100px">Instansi</th>
-                  <th style="width:140px;text-align:center">Action</th>
+                  <th>Judul</th>
+                  <th>Isi</th>
+                  <th>Foto</th>
+                  <th>Jurusan</th>
+                  <th>Instansi</th>
+                  <th>Tanggal Berakhir</th>
+                  <th style="text-align:center">Action</th>
                 </tr>
               </thead>
               <tbody>
@@ -158,6 +159,13 @@
   },
 },
   {data:"instansi.nama",
+  "searchable": false,
+  "sortable": false,
+  render: function (id, type, full, meta) {
+    return '<div class="instansi">'+id+'</div>';
+  },
+},
+{data:"tenggat",
   "searchable": false,
   "sortable": false,
   render: function (id, type, full, meta) {

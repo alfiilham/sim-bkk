@@ -106,48 +106,47 @@
 </div>
 <!-- Jumbotron -->
   {{-- Informasi Loker --}}
-      <div class="row">
-        
+    <div class="row">
       <div class="col-md-12 mt-6">
-                        <div class="container">
-                          <div class="row">
-                            <div class="col-lg-8">
-                              <div class="row">
-                                <div class="col-12">
-                                  <div class="section-title">
-                                    <h2>Informasi Lowongan Kerja</h2>
-                                  </div>
-                                </div>
-                              </div>
-                                <div class="col-md-12">
-                                  @forelse($lowongan as $data)
-                                  <div class="card" style="width: 19rem;">
-                                    <img class="card-img-top" src='image/InfoLowongan/{{$data->foto}}' alt="Card image cap">
-                                    <div class="card-body">
-                                      <h5 class="card-title"><a href="/form-single-lowongan;{{$data->id}}">{{$data->judul}}</a></h5>
-                                      <p class="isi"> {!!$data->isi!!}</p>
-                                    </div>
-                                    <ul class="list-group list-group-flush">
-                                      <li class="list-group-item">{{substr($data->updated_at,0,10)}}</li>
-                                    </ul>
-                                  </div>
-                                  @empty
-    
-                                  <center><i class="far fa-sad-tear"></i><h1>Belum ada Info Sekolah</h1></center>
-                                 @endforelse
-
-                                  {{-- More --}}
-                                  <p>
-                                        <a href="{{url('/form-full-lowongan')}}" class="more">Lainnya<span class="icon-keyboard_arrow_right"></span></a>
-                                      </p>
-                                  {{-- End More --}}
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                        <!-- END section -->
+        <div class="container text-center">
+          <div class="row">
+            <div class="col-lg-12">
+              <div class="row">
+                <div class="col-12">
+                  <div class="section-title">
+                    <h2>Informasi Lowongan Kerja</h2>
                   </div>
+                </div>
+              </div>
+                <div class="row">
+                  @forelse($lowongan as $data)
+                  <div class="col-sm-2 align-center">
+                    <div class="card">
+                      <img class="card-img-top" src='image/InfoLowongan/{{$data->foto}}' alt="Card image cap">
+                      <div class="card-body">
+                        <h5 class="card-title text-decoration"><a href="/form-single-lowongan;{{$data->id}}">{{$data->judul}}</a></h5>
+                        <p class="isi"> {!!$data->isi!!}</p>
+                      </div>
+                      <ul class="list-group list-group-flush">
+                        <li class="list-group-item">{{substr($data->updated_at,0,10)}}</li>
+                      </ul>
+                    </div>
+                  </div>
+                  @empty
+                  <center><i class="far fa-sad-tear"></i><h1>Belum ada Info Sekolah</h1></center>
+                  @endforelse
+                  {{-- More --}}
+                  <p>
+                    <a href="{{url('/form-full-lowongan')}}" class="more">Lainnya<span class="icon-keyboard_arrow_right"></span></a>
+                  </p>
+                  {{-- End More --}}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- END section -->
+  </div>
   {{-- End Loker --}}
   {{-- Informasi sekolah --}}
   <div class="row">

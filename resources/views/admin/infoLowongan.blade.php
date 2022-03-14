@@ -56,6 +56,7 @@
                   <th>Foto</th>
                   <th>Jurusan</th>
                   <th>Instansi</th>
+                  <th>Tanggal Berakhir</th>
                   <th>Status</th>
                   <th class="text-center" style="width:200px">Action</th>
                 </tr>
@@ -113,6 +114,13 @@
   },
 },
   {data:"instansi.nama",
+  "searchable": false,
+  "sortable": false,
+  render: function (id, type, full, meta) {
+    return '<div class="instansi">'+id+'</div>';
+  },
+},
+{data:"tenggat",
   "searchable": false,
   "sortable": false,
   render: function (id, type, full, meta) {

@@ -163,7 +163,27 @@ h1, h2, h3, h4, h5,
       height: 300px !important;
       
     } }
-
+    .site-section {
+      padding: 7em 0; 
+    }
+      @media (min-width: 768px) {
+        .site-section {
+          padding: 7em 0; 
+        } 
+      }
+      .site-section.site-section-sm {
+        padding: 4em 0; 
+      }
+    .site-section-heading {
+      padding-bottom: 20px;
+      margin-bottom: 0px;
+      position: relative;
+      font-size: 2.5rem; }
+      @media (min-width: 768px) {
+        .site-section-heading {
+          font-size: 3rem; } }
+    
+  
 .bg-image {
   background-size: cover;
   border-radius: 10px;

@@ -54,7 +54,7 @@ class daftarLowonganController extends Controller
             return DataTables::eloquent($model)->make(true);
         }
         elseif(Auth::user()->role == 'alumni'){
-            $model = daftarLowongan::with(['Lowongan','Instansi', 'Datasiswa'])->where('jurusan_id', Auth::user()->datasiswa->jurusan_id);
+            $model = daftarLowongan::with(['Lowongan','Instansi', 'Datasiswa'])->where('user_id', Auth::user()->datasiswa->user_id);
             return DataTables::eloquent($model)->make(true);
         }
         $model = daftarLowongan::with(['Lowongan','Instansi', 'Datasiswa'])->where('infoLowongan_id',$request->session()->get('lowongan_id'));

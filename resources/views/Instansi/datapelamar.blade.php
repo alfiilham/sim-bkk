@@ -116,7 +116,7 @@ var table = $('#table').DataTable({
       "searchable": false,
       "sortable": false,
       render: function (id, type, full, meta) {
-        return '<div class="btn-group d-flex justify-content-center"><a href="/resume/'+id+'" data-toggle="tooltip" id="cv" data-id="'+id+'" data-original-title="cv" class="btn btn-info btn-sm mr-2"><i class="fa fa-eye"></i></a> <a href="javascript:void(0)" data-toggle="tooltip" id="active"  data-id="'+id+'" class="btn btn-success btn-sm mr-2"><i class="fa fa-check" style="color:white;"></i></a><a href="javascript:void(0)" data-toggle="tooltip" id="deactive"  data-id="'+id+'" class="btn btn-danger btn-sm"><i class="fa fa-times" style="color:white;"></i></a></div>';
+        return `${full.status === "Diterima" ? '<div class="btn-group d-flex justify-content-center"><a href="/resume/'+id+'" data-toggle="tooltip" id="cv" data-id="'+id+'" data-original-title="cv" class="btn btn-info btn-sm mr-2"><i class="fa fa-eye"></i></a> </div>':'<div class="btn-group d-flex justify-content-center"><a href="/resume/'+id+'" data-toggle="tooltip" id="cv" data-id="'+id+'" data-original-title="cv" class="btn btn-info btn-sm mr-2"><i class="fa fa-eye"></i></a> <a href="javascript:void(0)" data-toggle="tooltip" id="active"  data-id="'+id+'" class="btn btn-success btn-sm mr-2"><i class="fa fa-check" style="color:white;"></i></a><a href="javascript:void(0)" data-toggle="tooltip" id="deactive"  data-id="'+id+'" class="btn btn-danger btn-sm"><i class="fa fa-times" style="color:white;"></i></a></div>'}`;
       },
       },
     ],

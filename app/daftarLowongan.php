@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class daftarLowongan extends Model
 {
-    public function Instansi()
+    public function instansi()
     {
         return $this->hasOne(Instansi::class, 'id' , 'instansi_id');
     }
@@ -14,7 +14,7 @@ class daftarLowongan extends Model
     {
         return $this->hasOne(Jurusan::class, 'id' , 'user_id');
     }
-    public function Lowongan()
+    public function lowongan()
     {
         return $this->hasOne(InfoLowongan::class, 'id' , 'infoLowongan_id');
     }
@@ -22,9 +22,9 @@ class daftarLowongan extends Model
     {
         return $this->hasOne(Jurusan::class, 'id' , 'jurusan_id');
     }
-    public function Datasiswa()
+    public function datasiswa()
     {
-        return $this->belongsTo(DataSiswa::class, 'user_id' , 'user_id');
+        return $this->hasOne(DataSiswa::class, 'user_id' , 'user_id');
     }
     protected $fillable = [
     	'user_id','instansi_id','infoLowongan_id','jurusan_id','status'

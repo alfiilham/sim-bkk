@@ -61,12 +61,12 @@ class daftarLowonganController extends Controller
         return DataTables::eloquent($model)->make(true);
     }
 
-    public function active($user_id)
+    public function active(Request $request,$user_id)
     {
         $data = Datasiswa::where('user_id',$user_id)->first();
 
         //update status
-        daftarLowongan::where('user_id',$user_id)->update(['status' => 'Diterima']);
+        daftarLowongan::where([['user_id',$user_id],['infoLowongan_id',$request->infoLowongan_id]])->update(['status' => 'Diterima']);
 
         //kirim email
         if($data->email_verified_at != null){
@@ -89,9 +89,20 @@ class daftarLowonganController extends Controller
         return response()->json();
     }
 
-    public function deactive($user_id)
+    public function deactive(Request $request,$user_id)
     {
-        daftarLowongan::where('user_id',$user_id)->update(['status' => 'Tidak Diterima']);
+        $data = Datasiswa::where('user_id',$user_id)->first();
+
+        daftarLowongan::where([['user_id',$user_id],['infoLowongan_id',$request->infoLowongan_id]])->update(['status' => 'Tidak Diterima']);
+
+        //kirim email
+        if($data->email_verified_at != null){
+            $instansi = Auth::user()->dataInstansi->nama;
+            $isi = "<strong>MAAF ANDA DINYATAKAN TIDAK DITERIMA</strong> di perusahaan $instansi tetap semangat dan pantang menyerah";
+            $type = "lowongan ditolak";
+            Mail::to($data->email)->send(new reminder($isi,$instansi,$type));
+        }
+
         return response()->json();
     }
 

@@ -116,7 +116,7 @@ var table = $('#table').DataTable({
       "searchable": false,
       "sortable": false,
       render: function (id, type, full, meta) {
-        return `${full.status === "Diterima" ? '<div class="btn-group d-flex justify-content-center"><a href="/resume/'+id+'" data-toggle="tooltip" id="cv" data-id="'+id+'" data-original-title="cv" class="btn btn-info btn-sm mr-2"><i class="fa fa-eye"></i></a> </div>':'<div class="btn-group d-flex justify-content-center"><a href="/resume/'+id+'" data-toggle="tooltip" id="cv" data-id="'+id+'" data-original-title="cv" class="btn btn-info btn-sm mr-2"><i class="fa fa-eye"></i></a> <a href="javascript:void(0)" data-toggle="tooltip" id="active"  data-id="'+id+'" class="btn btn-success btn-sm mr-2"><i class="fa fa-check" style="color:white;"></i></a><a href="javascript:void(0)" data-toggle="tooltip" id="deactive"  data-id="'+id+'" class="btn btn-danger btn-sm"><i class="fa fa-times" style="color:white;"></i></a></div>'}`;
+        return `${full.status === "Proses" ? '<div class="btn-group d-flex justify-content-center"><a href="/resume/'+id+'" data-toggle="tooltip" id="cv" data-id="'+id+'" data-original-title="cv" class="btn btn-info btn-sm mr-2"><i class="fa fa-eye"></i></a> <a href="javascript:void(0)" data-toggle="tooltip" id="active"  data-id="'+id+'" data-lowongan="'+full.infoLowongan_id+'" class="btn btn-success btn-sm mr-2"><i class="fa fa-check" style="color:white;"></i></a><a href="javascript:void(0)" data-toggle="tooltip" id="deactive"  data-id="'+id+'" data-lowongan="'+full.infoLowongan_id+'" class="btn btn-danger btn-sm"><i class="fa fa-times" style="color:white;"></i></a></div>':'<div class="btn-group d-flex justify-content-center"><a href="/resume/'+id+'" data-toggle="tooltip" id="cv" data-id="'+id+'" data-original-title="cv" class="btn btn-info btn-sm mr-2" target="__blank"><i class="fa fa-eye"></i></a> </div>'}`;
       },
       },
     ],
@@ -131,6 +131,7 @@ $(document).on('click','#active',function(){
 }).then((result) => {
   if (result.value) {
       var id = $(this).data("id");
+      var lowongan_id = $(this).data("lowongan");
       $.ajaxSetup({ 
         headers: {
           'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -138,7 +139,7 @@ $(document).on('click','#active',function(){
       })
 
       $.ajax({
-        data: {"user_id": id},
+        data: {"user_id": id,"infoLowongan_id":lowongan_id},
         url: "/daftarlowongan/active/"+id,
         type: "POST",
         dataType: 'json',
@@ -178,6 +179,7 @@ $(document).on('click','#active',function(){
 }).then((result) => {
   if (result.value) {
     var id = $(this).data("id");
+    var lowongan_id = $(this).data("lowongan");
     $.ajaxSetup({ 
       headers: {
         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -185,7 +187,7 @@ $(document).on('click','#active',function(){
     })
 
     $.ajax({
-      data: {"id": id},
+      data: {"user_id": id,"infoLowongan_id":lowongan_id},
       url: "/daftarlowongan/deactive/"+id,
       type: "POST",
       dataType: 'json',

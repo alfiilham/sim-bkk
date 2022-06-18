@@ -59,5 +59,18 @@ class reminder extends Mailable
                         'website' => 'www.simbkk.com',
                         ]);
         }
+        elseif($this->type == "lowongan ditolak"){
+            return $this->Subject('Lamaran Ditolak')
+                        ->view('emails.reminderLowonganDiterima')
+                        ->with(
+                        [
+                        'nama' => 'Pelamar Tangguh',
+                        'intro' => 'Melalui email ini kami ingin menginfokan .',
+                        'instansi' => 'info Lamaran anda dari '.$this->instansi,
+                        'content' => $this->isi,
+                        'closing' => 'Demikian email dari kami  Atas perhatian dari Bapak/Ibu kami ucapkan terima kasih.',
+                        'website' => 'www.simbkk.com',
+                        ]);
+        }
     }
 }

@@ -74,6 +74,7 @@
                         <label for="">Email</label>
                          <input placeholder="Email" name="email" class="form-control" value="{{auth::user()->email}}" required>
                          @if(auth::user()->email_verified_at == null && auth::user()->email != null )
+                         {{-- <a href="#" class="btn {{$preset->buttonClass}} mt-3"></a> --}}
                          <button class="btn {{$preset->buttonClass}} mt-3"  name="submit" value="verifikasi">Verifikasi Email</button>
                           @endif
                       </div>

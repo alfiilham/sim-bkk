@@ -102,6 +102,7 @@
                 </div>
                   <br>
               </div>
+              @auth
               <div class="col-md-4">
                 <h5>Kirim Pesan</h5>
                   <div class="row">
@@ -117,7 +118,8 @@
                     </div>
                   </div>
                   <br>
-              </div>
+              </div>   
+              @endauth
           </div>
         </div>
         <p class="mt-2" style="text-align: center;">
